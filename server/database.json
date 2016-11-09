@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "geegomoonshine",
+    "password": "ToomasOnHeaDm123",
+    "host": "localhost",
+    "database": "lindoriadb",
+    "schema": "dbv"
+  },
+  "sql-file": true
+}

@@ -1,0 +1,1 @@
+DELETE FROM web.users WHERE username = 'tsunsun';

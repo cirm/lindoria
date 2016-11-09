@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb"
+  ],
+  "plugins": [
+    "mocha",
+    "react"
+  ],
+  "rules": {
+    "mocha/no-exclusive-tests": 2,
+    "mocha/handle-done-callback": 2,
+    "mocha/no-synchronous-tests": 2,
+    "jsx-a11y/anchor-has-content": 0,
+    "react/prefer-stateless-function": 2
+  }
+}

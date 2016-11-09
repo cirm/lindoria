@@ -1,0 +1,1 @@
+CREATE SCHEMA empires AUTHORIZATION geegomoonshine;
