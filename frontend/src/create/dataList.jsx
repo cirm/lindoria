@@ -36,7 +36,7 @@ const filterStyle = {
   fontSize: '1em',
 };
 
-const dataList = props => {
+const dataList = (props) => {
   columnHeaders = [];
   getData(props.fields);
   return (

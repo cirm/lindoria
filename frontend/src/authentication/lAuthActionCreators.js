@@ -8,6 +8,13 @@ export function authenticateUser(userData) {
   };
 }
 
+export function queriedUpdates() {
+  return {
+    meta: { remote: true },
+    type: 'QUERY_DATA',
+  };
+}
+
 export function logoutUser() {
   return {
     type: LOGOUT,

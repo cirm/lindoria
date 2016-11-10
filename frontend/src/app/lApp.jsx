@@ -10,7 +10,6 @@ const App = (props) => (
 
 App.propTypes = {
   children: PropTypes.object,
-  drawerState: PropTypes.object,
 };
 
 export default App;

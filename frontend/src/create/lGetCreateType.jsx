@@ -7,7 +7,7 @@ const types = ['domain', 'person', 'organization'];
 
 const loadCreate = (type, dispatch) => dispatch(setCreateType(type));
 
-const getCreateType = (props) => (<div className="container" >{map(types, type => (
+const getCreateType = props => (<div className="container" >{map(types, type => (
   <FlatButton
     label={type}
     key={type}

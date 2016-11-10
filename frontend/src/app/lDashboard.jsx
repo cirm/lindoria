@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import PureComponent from '../lib/PureComponent';
 import connect from 'react-redux/lib/components/connect';
+import PureComponent from '../lib/PureComponent';
 import { LandingDashboardContainer } from '../landingBoard/lLandingDashBoard';
-import MaterialUiForm from '../authentication/newFormLogin';
+import MaterialUiForm from '../authentication/lAuthLoginForm';
 
 export class MainDashboard extends PureComponent {
   render() {

@@ -16,7 +16,7 @@ const login = (state, data) => {
   return state.merge(new Map(profile));
 };
 
-const logout = state => {
+const logout = (state) => {
   localStorage.removeItem(tokenKey);
   browserHistory.push('/');
   return state.clear();
@@ -28,7 +28,9 @@ const getInitialState = (state = new Map()) => {
     return state;
   }
   const profile = decodeProfile(token);
-  return state.merge(new Map(profile));
+  return state
+    .merge(new Map(profile))
+    .set('updates', true);
 };
 
 function authReducer(state = getInitialState(), action) {
@@ -39,6 +41,8 @@ function authReducer(state = getInitialState(), action) {
       return login(state, action.data);
     case LOGOUT:
       return logout(state);
+    case 'QUERY_DATA':
+      return state.delete('updates');
     default:
       return state;
   }

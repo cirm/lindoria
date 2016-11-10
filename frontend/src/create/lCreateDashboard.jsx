@@ -1,34 +1,35 @@
 import React, { PropTypes } from 'react';
-import PureComponent from '../lib/PureComponent';
 import connect from 'react-redux/lib/components/connect';
-import CreatePersonForm from './lCreatePerson';
-import CreateDomainForm from './lCreateDomain';
 import GetCreateType from './lGetCreateType';
 import DataList from './dataList';
+import PureComponent from '../lib/PureComponent';
+import CreatePersonForm from './lCreatePerson';
+import CreateDomainForm from './lCreateDomain';
 import styles from './create.styl';
 
 class CreateDashboard extends PureComponent {
   getCreateType() {
-    if (this.props.createType === 'domain') {
-      return (
-        <div>
+    switch (this.props.createType) {
+      case 'domain':
+        return (<div>
           <DataList fields={this.props.domains} />
           <CreateDomainForm dispatch={this.props.dispatch} />
         </div>);
-    } else if (this.props.createType === 'person') {
-      return (
-        <div>
-          <DataList fields={this.props.persons} />
-          <CreatePersonForm dispatch={this.props.dispatch} />
-        </div>);
-    } else if (this.props.createType === 'province') {
-      return (
-        <div>
-          <DataList fields={this.props.provinces} />
-          <CreatePersonForm dispatch={this.props.dispatch} />
-        </div>);
+      case 'person':
+        return (
+          <div>
+            <DataList fields={this.props.persons} />
+            <CreatePersonForm dispatch={this.props.dispatch} />
+          </div>);
+      case 'province':
+        return (
+          <div>
+            <DataList fields={this.props.provinces} />
+            <CreatePersonForm dispatch={this.props.dispatch} />
+          </div>);
+      default:
+        return null;
     }
-    return null;
   }
 
   render() {

@@ -43,7 +43,7 @@ ReactDOM.render(
       <Router history={browserHistory} >{routes}</Router>
     </Provider>
   </MuiThemeProvider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );
 
 if (module.hot) {
@@ -54,7 +54,7 @@ if (module.hot) {
           <Router history={browserHistory} >{routes}</Router>
         </Provider>
       </MuiThemeProvider>,
-      document.getElementById('app')
+      document.getElementById('app'),
     );
   });
 }
