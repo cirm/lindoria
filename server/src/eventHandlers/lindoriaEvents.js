@@ -9,6 +9,7 @@ export const getContent = async (socket) => {
     domains: data.domains || [],
     persons: data.persons || [],
     provinces: data.provinces || [],
+    organizations: data.organizations || [],
   });
   const finish = new Date();
   logger.info(`dataQuery took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);

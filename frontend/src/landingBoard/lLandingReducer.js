@@ -12,6 +12,7 @@ const updateFocus = (state, data) => state.set('focus', fromJS(data));
 const dataUpdate = (state, data) => state
   .set('domains', fromJS(data.domains))
   .set('provinces', fromJS(data.provinces))
+  .set('organizations', fromJS(data.organizations))
   .set('persons', fromJS(data.persons));
 
 const getContent = state => state;

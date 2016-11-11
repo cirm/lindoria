@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
-import PureComponent from '../lib/PureComponent';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import { Field, reduxForm } from 'redux-form';
+import PureComponent from '../lib/PureComponent';
 import { createPerson } from './lCreateActionCreators';
 
 const renderTextField = field => (
   <TextField
-    hintText={field.input.label}
+    hintText={field.label}
     errorText={field.touched && field.error}
     {...field.input}
   />

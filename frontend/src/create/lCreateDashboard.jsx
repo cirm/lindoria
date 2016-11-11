@@ -4,16 +4,22 @@ import GetCreateType from './lGetCreateType';
 import DataList from './dataList';
 import PureComponent from '../lib/PureComponent';
 import CreatePersonForm from './lCreatePerson';
+import CreateOrganizationForm from './lCreateOrganization';
 import CreateDomainForm from './lCreateDomain';
 import styles from './create.styl';
 
 class CreateDashboard extends PureComponent {
-  getCreateType() {
+  getCreateType () {
     switch (this.props.createType) {
       case 'domain':
         return (<div>
           <DataList fields={this.props.domains} />
           <CreateDomainForm dispatch={this.props.dispatch} />
+        </div>);
+      case 'organization':
+        return (<div>
+          <DataList fields={this.props.organizations} />
+          <CreateOrganizationForm dispatch={this.props.dispatch} persons={this.props.persons} />
         </div>);
       case 'person':
         return (
@@ -32,16 +38,17 @@ class CreateDashboard extends PureComponent {
     }
   }
 
-  render() {
+  render () {
     return (<div>{!!this.props.createType ? <div>{this.getCreateType()}</div> :
       <GetCreateType dispatch={this.props.dispatch} />}</div>);
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     createType: state.create.get('type'),
     persons: state.landing.get('persons'),
+    organizations: state.landing.get('organizations'),
     domains: state.landing.get('domains'),
     provinces: state.landing.get('provinces'),
   };

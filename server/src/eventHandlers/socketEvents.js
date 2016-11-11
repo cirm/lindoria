@@ -10,7 +10,7 @@ const protectedRoutes = {
   testing: testingEvent,
   GET_CONTENT: getContent,
   CREATE_PERSON: createPerson,
-  CREATE_ORG: createOrg,
+  CREATE_ORGANIZATION: createOrg,
   CREATE_DOMAIN: createDomain,
   CREATE_PROVINCE: createProvince,
 };

@@ -29,6 +29,21 @@ FROM
 $BODY$
 LANGUAGE SQL;
 
+CREATE OR REPLACE FUNCTION empires.get_organizations() RETURNS JSON AS
+$BODY$
+SELECT
+    array_to_json(array_agg(row_to_json(p)))
+FROM
+    (SELECT
+        eo.oname,
+        eo.display,
+        eo.owner,
+        eo.abbr,
+        eo.treasury
+    FROM empires.organizations eo) p;
+$BODY$
+LANGUAGE SQL;
+
 CREATE OR REPLACE FUNCTION empires.get_domains() RETURNS JSON AS
 $BODY$
 SELECT
@@ -49,8 +64,9 @@ CREATE OR REPLACE FUNCTION empires.get_br_data(
 RETURNS
     TABLE
         (provinces json,
-        persons json,
-        domains json
+         organizations json,
+         persons json,
+         domains json
     ) AS
 $BODY$
 SELECT
@@ -59,6 +75,11 @@ SELECT
     FROM
         empires.get_provinces(i_visible))
         AS provinces,
+    (SELECT
+        *
+    FROM
+        empires.get_organizations())
+        AS organizations,
     (SELECT
         *
     FROM

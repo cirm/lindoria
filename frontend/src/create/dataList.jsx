@@ -13,8 +13,8 @@ import TextField from 'material-ui/TextField';
 
 let columnHeaders = [];
 
-const getData = data => {
-  if (!data) return [];
+const getData = (data) => {
+  if (!data.size) return [];
   return data.first().mapKeys(key => columnHeaders.push(key));
 };
 
@@ -29,6 +29,8 @@ const headerMap = {
   loyalty: 'Loyalty',
   level: 'Level',
   domain: 'Domain',
+  oname: 'Unique key',
+  owner: 'Responsible person',
 };
 
 const filterStyle = {
