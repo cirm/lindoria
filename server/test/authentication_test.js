@@ -24,6 +24,17 @@ describe('Authentication', () => {
     });
   });
 
+  it('should handle missing payload', (done) => {
+    const client = io.connect(authenticationUrl, options);
+    client.on('connect', () => {
+      client.emit(authEvent);
+      client.on(unauthorized, () => {
+        client.disconnect();
+        done();
+      });
+    });
+  });
+
   it('should handle erroneus username', (done) => {
     const client = io.connect(authenticationUrl, options);
     client.on('connect', () => {
@@ -35,11 +46,23 @@ describe('Authentication', () => {
     });
   });
 
+  it('should handle erroneus username with password', (done) => {
+    const client = io.connect(authenticationUrl, options);
+    client.on('connect', () => {
+      client.emit(authEvent, { username: 12345, password: 112233 });
+      client.on(unauthorized, () => {
+        client.disconnect();
+        done();
+      });
+    });
+  });
+
+
   it('should have capability for authentication', (done) => {
     const client = io.connect(authenticationUrl, options);
     client.on('connect', () => {
       client.emit(authEvent, { username: 'tsunsun', password: 'EndOria' });
-      client.on(tokenEvent, response => {
+      client.on(tokenEvent, (response) => {
         expect(response).to.be.an('object');
         expect(response.token.length).to.equal(227);
         client.disconnect();
@@ -51,7 +74,7 @@ describe('Authentication', () => {
   it('should return Unauthorized with wrong password', (done) => {
     const client = io.connect(authenticationUrl, options);
     client.on('connect', () => {
-      client.emit(authEvent, { username: 'tsunsun', password: 'asd' });
+      client.emit(authEvent, { username: 'tsunsun', password: 123456 });
       client.on(unauthorized, () => {
         client.disconnect();
         done();

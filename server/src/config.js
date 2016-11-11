@@ -24,4 +24,4 @@ const config = {
   },
 };
 
-export const getEnvConf = () => config[env];
+export default config[env];

@@ -20,7 +20,7 @@ describe('Token', () => {
     const client = io.connect(authUrl, options);
     client.on('connect', () => {
       client.emit(authEvent, { username: 'tsunsun', password: 'EndOria' });
-      client.on(tokenEvent, response => {
+      client.on(tokenEvent, (response) => {
         token = response.token;
         client.disconnect();
         done();

@@ -1,8 +1,7 @@
 import Promise from 'bluebird';
 import monitor from 'pg-monitor';
 import Pgp from 'pg-promise';
-import { getEnvConf } from '../../src/config';
-const conf = getEnvConf();
+import conf from '../../src/config';
 
 const options = { promiseLib: Promise };
 monitor.attach(options);
