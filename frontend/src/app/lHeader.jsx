@@ -89,8 +89,8 @@ Header.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profile,
-    drawerState: state.landing.get('drawerState'),
+    profile: state.get('profile'),
+    drawerState: state.getIn(['landing', 'drawerState']),
   };
 }
 

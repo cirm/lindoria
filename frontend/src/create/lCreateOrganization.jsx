@@ -3,11 +3,11 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
-import { Field, reduxForm } from 'redux-form';
-import PureComponent from '../lib/PureComponent';
-import { createOrganization } from './lCreateActionCreators';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import { Field, reduxForm } from 'redux-form/immutable';
+import PureComponent from '../lib/PureComponent';
+import { createOrganization } from './lCreateActionCreators';
 
 
 const renderTextField = field => (

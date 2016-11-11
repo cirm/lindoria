@@ -1,4 +1,4 @@
-import { CREATE_TYPE, CREATE_PERSON, CREATE_ORGANIZATION } from './lCreateActionConstants';
+import { CREATE_TYPE, CREATE_PERSON, CREATE_ORGANIZATION, CREATE_DOMAIN } from './lCreateActionConstants';
 
 export function setCreateType(type) {
   return {
@@ -19,6 +19,14 @@ export function createOrganization(values) {
   return {
     meta: { lindoria: true },
     type: CREATE_ORGANIZATION,
+    data: values,
+  };
+}
+
+export function createDomain(values) {
+  return {
+    meta: { lindoria: true },
+    type: CREATE_DOMAIN,
     data: values,
   };
 }

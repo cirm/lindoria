@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
 import { createPerson } from './lCreateActionCreators';
 

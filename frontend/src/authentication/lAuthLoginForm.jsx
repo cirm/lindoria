@@ -1,14 +1,16 @@
 import React, { PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { authenticateUser } from './lAuthActionCreators';
+import { Field, reduxForm } from 'redux-form/immutable';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import { authenticateUser } from './lAuthActionCreators';
+
 
 const renderTextField = field => (
   <TextField
-    hintText={field.input.label}
+    hintText={field.label}
+    type={field.type}
     errorText={field.touched && field.error}
     {...field.input}
   />

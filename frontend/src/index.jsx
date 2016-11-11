@@ -23,7 +23,7 @@ const store = getStore();
 injectTapEventPlugin();
 
 const requireAuth = (nextState, replace) => {
-  if (!store.getState().profile.get('username')) {
+  if (!store.getState().getIn(['profile', 'username'])) {
     replace({
       pathname: '/',
       state: { nextPathname: nextState.location.pathname },

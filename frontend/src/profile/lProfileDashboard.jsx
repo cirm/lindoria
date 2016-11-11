@@ -20,7 +20,7 @@ ProfileDashboard.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profile,
+    profile: state.get('profile'),
   };
 }
 
