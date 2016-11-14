@@ -27,7 +27,7 @@ const attachProtectedEventsToSocket = (socket) => {
         socket.emit(ERROR, 'Authentication error');
         return;
       }
-      fn(socket, data);
+      fn(socket, data, isAllowed.roles);
     }));
 };
 

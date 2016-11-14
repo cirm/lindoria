@@ -1,26 +1,21 @@
 import React, { PropTypes } from 'react';
-import PureComponent from '../lib/PureComponent';
 import Paper from 'material-ui/Paper';
+import { toJS, Map } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List, ListItem } from 'material-ui/List';
+import PureComponent from '../lib/PureComponent';
 import { setFocus } from './lLandingActionCreators';
 import { AddNewItem } from './lLandingAddNew';
-import forEach from 'lodash/forEach';
 
-export class LindoriaList extends PureComponent {
-  setFocus(target) {
-    if (this.props.focus !== target.province) {
-      this.props.dispatch(setFocus(target));
-    }
+class LindoriaList extends PureComponent {
+  getFocusProvinceName() {
+    return this.props.focus ? this.props.focus.getIn(['province', 'pname']) : false;
   }
 
-  getDomainsProvinces(dname) {
-    const provinces = [];
-    this.props.provinces.map(province => {
-      if (province.get('domain') === dname) {
-        provinces.push(province);
-      }
-    });
-    return provinces;
+  setFocus(target) {
+    if (this.getFocusProvinceName() !== target.province.get('pname')) {
+      this.props.dispatch(setFocus(target));
+    }
   }
 
   getCreateMenuState(param) {
@@ -34,19 +29,21 @@ export class LindoriaList extends PureComponent {
     return (
       <Paper zDepth={2} className="container list" >
         <List>
-          {!!this.props.domains ?
+          {this.props.domains ?
             this.props.domains.map(domain =>
               < ListItem
                 primaryText={domain.get('display')}
                 primaryTogglesNestedList
                 key={domain.get('dname')}
-                nestedItems={this.getDomainsProvinces(domain.get('dname')).map(province =>
-                  <ListItem
-                    primaryText={province.get('display')}
-                    key={province.get('pname')}
-                    onClick={() => this.setFocus({ domain, province })}
-                  />
-                )}
+                nestedItems={this.props.provinces
+                  .filter(province => province.get('domain') === domain.get('dname'))
+                  .map(province =>
+                    <ListItem
+                      primaryText={province.get('display')}
+                      key={province.get('pname')}
+                      onClick={() => this.setFocus({ domain, province })}
+                    />,
+                  ).toJS()}
               />) : null}
           <AddNewItem
             dispatch={this.props.dispatch}
@@ -60,10 +57,11 @@ export class LindoriaList extends PureComponent {
 }
 
 LindoriaList.propTypes = {
-  domains: PropTypes.object,
-  nestedItems: PropTypes.object,
-  createMenu: PropTypes.object,
-  provinces: PropTypes.object,
-  focus: PropTypes.object,
+  domains: ImmutablePropTypes.list,
+  createMenu: ImmutablePropTypes.map,
+  provinces: ImmutablePropTypes.list,
+  focus: ImmutablePropTypes.map,
   dispatch: PropTypes.func,
 };
+
+export default LindoriaList;

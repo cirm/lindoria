@@ -6,14 +6,12 @@ import Route from 'react-router/lib/Route';
 import Provider from 'react-redux/lib/components/Provider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './app/lApp';
-import { DashboardContainer } from './app/lDashboard';
+import DashboardContainer from './app/lDashboard';
 import { ProfileDashboardContainer } from './profile/lProfileDashboard';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { CreateDashboardContainer } from './create/lCreateDashboard';
 import { getStore } from './store';
-
-require('./css/site.styl');
 
 const store = getStore();
 

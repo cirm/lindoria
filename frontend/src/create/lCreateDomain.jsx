@@ -45,7 +45,7 @@ class CreateDomain extends PureComponent {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, pristine, reset, submitting } = this.props;
     const formContainerClass = 'container login';
     const formClass = `${formContainerClass} form`;
     const toolbarClass = `${formContainerClass} toolbar`;

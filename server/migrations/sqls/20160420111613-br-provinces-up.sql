@@ -5,7 +5,7 @@ CREATE TABLE empires.provinces (
   regent  VARCHAR(10),
   loyalty INTEGER NOT NULL DEFAULT 3,
   domain  VARCHAR(10),
-  visible boolean NOT NULL,
+  visible boolean NOT NULL DEFAULT TRUE,
   abbr    VARCHAR(3),
   CONSTRAINT abbr_upper CHECK (abbr = upper(abbr)),
   CONSTRAINT abbr_length CHECK ( char_length(abbr) BETWEEN 2 AND 3),

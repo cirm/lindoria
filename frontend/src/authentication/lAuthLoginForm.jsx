@@ -5,10 +5,12 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import { authenticateUser } from './lAuthActionCreators';
+import styles from './lAuthLoginForm.styl';
 
 
 const renderTextField = field => (
   <TextField
+    className={styles.textField}
     hintText={field.label}
     type={field.type}
     errorText={field.touched && field.error}
@@ -17,23 +19,20 @@ const renderTextField = field => (
 );
 
 let dispatch;
-const formContainerClass = 'container login';
-const formClass = `${formContainerClass} form`;
-const toolbarClass = `${formContainerClass} toolbar`;
-const triggerLogin = (values) => dispatch(authenticateUser(values));
+const triggerLogin = values => dispatch(authenticateUser(values));
 
 
-const loginForm = props => {
+const loginForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   dispatch = props.dispatch;
   return (
-    <Paper zdepth={1} className={formContainerClass} >
-      <Toolbar className={toolbarClass} >
+    <Paper zdepth={1} className={styles.root} >
+      <Toolbar >
         <ToolbarGroup >
           <ToolbarTitle text="Please Authenticate!" />
         </ToolbarGroup>
       </Toolbar>
-      <form className={formClass} onSubmit={handleSubmit(triggerLogin)} >
+      <form onSubmit={handleSubmit(triggerLogin)} >
         <div>
           <Field name="username" component={renderTextField} label="username" />
         </div>
@@ -42,16 +41,16 @@ const loginForm = props => {
         </div>
         <div>
           <RaisedButton
+            className={styles.button}
             type="submit"
             disabled={pristine || submitting}
-            style={{ margin: 12 }}
           >Submit
           </RaisedButton>
           <RaisedButton
+            className={styles.button}
             type="button"
             disabled={pristine || submitting}
             onClick={reset}
-            style={{ margin: 12 }}
           >
             Reset
           </RaisedButton>

@@ -1,21 +1,15 @@
 import React, { PropTypes } from 'react';
-import PureComponent from '../lib/PureComponent';
 import connect from 'react-redux/lib/components/connect';
-import { LindoriaList } from './lLandingList';
-import { LindoriaFocus } from './lLandingFocus';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import PureComponent from '../lib/PureComponent';
+import LindoriaList from './lLandingList';
+import LindoriaFocus from './lLandingFocus';
 import { getContent } from './lLandingActionCreators';
 import { LindoriaDomainFocus } from './lLandingDomain';
 
 class LandingDashboard extends PureComponent {
   componentWillMount() {
     return this.props.dispatch(getContent());
-  }
-
-  getModalState() {
-    if (!this.props.createModal) {
-      return false;
-    }
-    return this.props.createModal.get('state');
   }
 
   render() {
@@ -29,10 +23,10 @@ class LandingDashboard extends PureComponent {
           dispatch={this.props.dispatch}
           createMenu={this.props.createMenu}
         />
-        {!!this.props.focus ?
+        {this.props.focus ?
           <div>
             <LindoriaDomainFocus focus={this.props.focus} />
-            <LindoriaFocus focus={this.props.focus} />
+            <LindoriaFocus focus={this.props.focus} persons={this.props.persons} domains={this.props.domains} />
           </div> : null}
       </div>
     );
@@ -40,10 +34,11 @@ class LandingDashboard extends PureComponent {
 }
 
 LandingDashboard.propTypes = {
-  focus: PropTypes.object,
-  domains: PropTypes.object,
-  provinces: PropTypes.object,
-  createMenu: PropTypes.object,
+  focus: ImmutablePropTypes.map,
+  domains: ImmutablePropTypes.list,
+  persons: ImmutablePropTypes.list,
+  provinces: ImmutablePropTypes.list,
+  createMenu: ImmutablePropTypes.map,
   dispatch: PropTypes.func,
 };
 
@@ -57,6 +52,8 @@ function mapStateToProps(state) {
   };
 }
 
-export const LandingDashboardContainer = connect(
+const LandingDashboardContainer = connect(
   mapStateToProps,
 )(LandingDashboard);
+
+export default LandingDashboardContainer;

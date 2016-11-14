@@ -8,7 +8,6 @@ import SelectField from 'material-ui/SelectField';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
 import { createProvince } from './lCreateActionCreators';
-import mapKeys from 'lodash/mapKeys';
 
 
 const renderTextField = field => (
@@ -35,7 +34,7 @@ const validate = (values) => {
   const errors = {};
   const requiredFields = ['domain', 'regent', 'loyalty'];
   requiredFields.forEach((field) => {
-    if (!values[field]) {
+    if (!values.get(field)) {
       errors[field] = 'Required';
     }
   });
@@ -52,7 +51,7 @@ const loyaltyMap = {
   5: 'helpful',
 };
 
-const provinceLevels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+const provinceLevels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 class CreateProvince extends PureComponent {
   constructor(props) {
@@ -96,8 +95,7 @@ class CreateProvince extends PureComponent {
           </div>
           <div>
             <Field name="loyalty" component={renderSelectField} label="Are we Happy?" >
-              {loyalty.map(key =>
-                <MenuItem value={key} primaryText={loyaltyMap[key]} />)}
+              {loyalty.map(key => <MenuItem value={key} primaryText={loyaltyMap[key]} />)}
             </Field>
           </div>
           <div>

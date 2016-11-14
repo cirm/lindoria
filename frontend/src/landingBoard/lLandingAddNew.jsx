@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
-import PureComponent from '../lib/PureComponent';
 import ListItem from 'material-ui/List/ListItem';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import browserHistory from 'react-router/lib/browserHistory';
 import { toggleCreateMenu } from './lLandingActionCreators';
 import { setCreateType } from '../create/lCreateActionCreators';
-import browserHistory from 'react-router/lib/browserHistory';
+import PureComponent from '../lib/PureComponent';
 
 export class AddNewItem extends PureComponent {
   constructor(props) {
