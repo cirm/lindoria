@@ -26,7 +26,6 @@
     "classnames": "^2.2.4",
     "history": "^4.4.0",
     "immutable": "^3.8.1",
-    "lodash": "^4.16.6",
     "material-ui": "0.16.1",
     "react": "^15.3.2",
     "react-addons-shallow-compare": "^15.3.2",

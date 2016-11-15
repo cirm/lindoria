@@ -9,7 +9,7 @@ class MainDashboard extends PureComponent {
   render() {
     return (
       <div className={styles.container} >{!!this.props.profile.get('username') ?
-        <LandingDashboardContainer classname={styles.landing} {...this.props} /> : <UILoginForm {...this.props} />}
+        <LandingDashboardContainer className={styles.landing} {...this.props} /> : <UILoginForm {...this.props} />}
       </div>
     );
   }

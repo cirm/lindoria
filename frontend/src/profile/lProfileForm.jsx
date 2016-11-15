@@ -1,21 +1,18 @@
 import React, { PropTypes } from 'react';
-import PureComponent from '../lib/PureComponent';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import { reduxForm } from 'redux-form';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import Paper from 'material-ui/Paper';
+import PureComponent from '../lib/PureComponent';
+import styles from './lProfileDashboard.styl';
+
 
 class ProfileForm extends PureComponent {
   constructor(props) {
     super(props);
     this.chainBind(['triggerUpdate']);
-  }
-
-  triggerUpdate(values) {
-    console.log(values);
-    // const dispatch = this.props.dispatch;
-    // dispatch(authenticateUser(values));
   }
 
   getUsername() {
@@ -30,19 +27,22 @@ class ProfileForm extends PureComponent {
     return this.props.profile.get('roles') || [];
   }
 
+  triggerUpdate(values) {
+    console.log(values);
+    // const dispatch = this.props.dispatch;
+    // dispatch(authenticateUser(values));
+  }
+
   render() {
     const { fields: { display, password, password1 }, handleSubmit } = this.props;
-    const formContainerClass = 'container profile';
-    const formClass = `${formContainerClass} form`;
-    const toolbarClass = `${formContainerClass} toolbar`;
     return (
-      <Paper className={formContainerClass} >
-        <Toolbar className={toolbarClass} >
+      <Paper className={styles.paper} >
+        <Toolbar className={styles.toolbar} >
           <ToolbarGroup >
             <ToolbarTitle text="Profile" />
           </ToolbarGroup>
         </Toolbar>
-        <form className={formClass} onSubmit={handleSubmit(this.triggerUpdate)} >
+        <form className={styles.form} onSubmit={handleSubmit(this.triggerUpdate)} >
           <TextField
             id="display"
             floatingLabelFixed
@@ -61,7 +61,8 @@ class ProfileForm extends PureComponent {
             id="password1"
             floatingLabelText="Password again"
             hintText="password"
-            type="password" {...password1} />
+            type="password" {...password1}
+          />
           <br />
           <TextField
             id="username"
@@ -86,11 +87,9 @@ class ProfileForm extends PureComponent {
 }
 
 ProfileForm.propTypes = {
-  dispatch: React.PropTypes.func,
-  handleSubmit: React.PropTypes.func,
-  fields: React.PropTypes.array,
-  profile: React.PropTypes.object,
-  className: React.PropTypes.object,
+  handleSubmit: PropTypes.func,
+  fields: PropTypes.list,
+  profile: ImmutablePropTypes.map,
 };
 
 export const ProfileFormContainer = reduxForm({

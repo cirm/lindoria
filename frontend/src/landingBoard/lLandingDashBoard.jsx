@@ -5,7 +5,8 @@ import PureComponent from '../lib/PureComponent';
 import LindoriaList from './lLandingList';
 import LindoriaFocus from './lLandingFocus';
 import { getContent } from './lLandingActionCreators';
-import { LindoriaDomainFocus } from './lLandingDomain';
+import LindoriaDomainFocus from './lLandingDomain';
+import styles from './lLandingDashBoard.styl';
 
 class LandingDashboard extends PureComponent {
   componentWillMount() {
@@ -14,7 +15,7 @@ class LandingDashboard extends PureComponent {
 
   render() {
     return (
-      <div>
+      <div className={styles.container} >
         <LindoriaList
           focus={this.props.focus}
           domains={this.props.domains}
@@ -24,9 +25,12 @@ class LandingDashboard extends PureComponent {
           createMenu={this.props.createMenu}
         />
         {this.props.focus ?
-          <div>
-            <LindoriaDomainFocus focus={this.props.focus} />
-            <LindoriaFocus focus={this.props.focus} persons={this.props.persons} domains={this.props.domains} />
+          <div className={styles.focusContainer} >
+            <LindoriaDomainFocus focus={this.props.focus} persons={this.props.persons} />
+            <LindoriaFocus
+              className={styles.focus} focus={this.props.focus}
+              persons={this.props.persons} domains={this.props.domains}
+            />
           </div> : null}
       </div>
     );

@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
-import { toJS, Map } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List, ListItem } from 'material-ui/List';
 import PureComponent from '../lib/PureComponent';
@@ -27,7 +26,7 @@ class LindoriaList extends PureComponent {
 
   render() {
     return (
-      <Paper zDepth={2} className="container list" >
+      <Paper zDepth={2} >
         <List>
           {this.props.domains ?
             this.props.domains.map(domain =>

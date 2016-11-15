@@ -26,7 +26,7 @@ const loginForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   dispatch = props.dispatch;
   return (
-    <Paper zdepth={1} className={styles.root} >
+    <Paper zdepth={1} className={styles.form} >
       <Toolbar >
         <ToolbarGroup >
           <ToolbarTitle text="Please Authenticate!" />

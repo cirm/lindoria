@@ -3,9 +3,10 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { loyaltyMap, getDisplay } from '../lib/utilities';
+import styles from './lLandingFocus.styl';
 
 const lindoriaFocus = props => (
-  <Paper zDepth={2} className="container focus province" >
+  <Paper className={styles.focus} zDepth={2}>
     <TextField
       id="display"
       floatingLabelText="display"
