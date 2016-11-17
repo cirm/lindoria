@@ -21,7 +21,6 @@ const renderTextField = field => (
 let dispatch;
 const triggerLogin = values => dispatch(authenticateUser(values));
 
-
 const loginForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   dispatch = props.dispatch;
@@ -62,6 +61,8 @@ const loginForm = (props) => {
 
 loginForm.propTypes = {
   dispatch: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  reset: PropTypes.func,
 };
 
 const LoginForm = reduxForm({

@@ -8,6 +8,7 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import MenuItem from 'material-ui/MenuItem';
 import PureComponent from '../lib/PureComponent';
 import { createDomain } from './lCreateActionCreators';
+import styles from './lActionContainer.styl';
 
 const renderTextField = field => (
   <TextField
@@ -52,7 +53,7 @@ class CreateDomain extends PureComponent {
 
     return (
 
-      <Paper zdepth={1} className={formContainerClass} >
+      <Paper zdepth={1} className={styles.root} >
         <Toolbar className={toolbarClass} >
           <ToolbarGroup >
             <ToolbarTitle text="Enter Domain details" />

@@ -8,7 +8,7 @@ import { toggleCreateMenu } from './lLandingActionCreators';
 import { setCreateType } from '../create/lCreateActionCreators';
 import PureComponent from '../lib/PureComponent';
 
-export class AddNewItem extends PureComponent {
+class AddNewItem extends PureComponent {
   constructor(props) {
     super(props);
     this.chainBind(['handleTouchTap']);
@@ -59,3 +59,5 @@ AddNewItem.propTypes = {
   target: PropTypes.bool,
   dispatch: PropTypes.func,
 };
+
+export default AddNewItem;

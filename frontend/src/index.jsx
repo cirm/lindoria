@@ -5,15 +5,13 @@ import Router from 'react-router/lib/Router';
 import Route from 'react-router/lib/Route';
 import Provider from 'react-redux/lib/components/Provider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import App from './app/lApp';
-import DashboardContainer from './app/lDashboard';
-import { ProfileDashboardContainer } from './profile/lProfileDashboard';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { CreateDashboardContainer } from './create/lCreateDashboard';
-import { getStore } from './store';
-
-const store = getStore();
+import App from './app/lApp';
+import DashboardContainer from './app/lDashboard';
+import ProfileDashboardContainer from './profile/lProfileDashboard';
+import CreateDashboardContainer from './create/lCreateDashboard';
+import store from './store';
 
 // Needed for onTouchTap
 // Check this repo:

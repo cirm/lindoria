@@ -10,6 +10,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
+import { startEditPerson } from './lCreateActionCreators';
+import styles from './lListContainer.styl';
 
 let columnHeaders = [];
 
@@ -38,11 +40,21 @@ const filterStyle = {
   fontSize: '1em',
 };
 
+const editRow = (props, item) => {
+  switch (props.type) {
+    case 'person':
+      props.dispatch(startEditPerson(item));
+      break;
+    default:
+      break;
+  }
+};
+
 const dataList = (props) => {
   columnHeaders = [];
   getData(props.fields);
   return (
-    <Paper className="dataList" >
+    <Paper className={styles.root} >
       {columnHeaders.length >= 1 ?
         <Table height="30em" >
           <TableHeader
@@ -58,7 +70,10 @@ const dataList = (props) => {
           </TableHeader>
           <TableBody displayRowCheckbox={false} >
             {props.fields.map(item =>
-              <TableRow key={item.get(columnHeaders[0])} >{map(columnHeaders, header =>
+              <TableRow
+                onTouchTap={() => editRow(props, item)}
+                key={item.get(columnHeaders[0])}
+              >{map(columnHeaders, header =>
                 <TableRowColumn key={item.get(header)} >
                   {item.get(header)}
                 </TableRowColumn>)}

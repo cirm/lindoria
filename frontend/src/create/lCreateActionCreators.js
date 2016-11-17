@@ -38,3 +38,10 @@ export function createProvince(values) {
     data: values,
   };
 }
+
+export function startEditPerson(data) {
+  return {
+    type: 'EDIT_PERSON',
+    data,
+  };
+}

@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List, ListItem } from 'material-ui/List';
 import PureComponent from '../lib/PureComponent';
 import { setFocus } from './lLandingActionCreators';
-import { AddNewItem } from './lLandingAddNew';
+import AddNewItem from './lLandingAddNew';
 
 class LindoriaList extends PureComponent {
   getFocusProvinceName() {

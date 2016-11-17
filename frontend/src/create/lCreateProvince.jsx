@@ -8,6 +8,7 @@ import SelectField from 'material-ui/SelectField';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
 import { createProvince } from './lCreateActionCreators';
+import styles from './lActionContainer.styl';
 
 
 const renderTextField = field => (
@@ -74,7 +75,7 @@ class CreateProvince extends PureComponent {
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
-      <Paper className="createProvince" zdepth={1} >
+      <Paper className={styles.root} zdepth={1} >
         <Toolbar className="toolBar" >
           <ToolbarGroup >
             <ToolbarTitle text="Enter Province details" />

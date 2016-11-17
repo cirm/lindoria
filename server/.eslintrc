@@ -3,11 +3,13 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "airbnb"
+    "airbnb",
+    "plugin:lodash-fp/recommended"
   ],
   "plugins": [
     "mocha",
-    "react"
+    "react",
+    "lodash-fp"
   ],
   "rules": {
     "mocha/no-exclusive-tests": 2,

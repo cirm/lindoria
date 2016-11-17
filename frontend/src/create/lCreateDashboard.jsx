@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import connect from 'react-redux/lib/components/connect';
 import GetCreateType from './lGetCreateType';
 import DataList from './dataList';
@@ -13,24 +13,24 @@ class CreateDashboard extends PureComponent {
     switch (this.props.createType) {
       case 'domain':
         return (<div>
-          <DataList fields={this.props.domains} />
+          <DataList fields={this.props.domains} type={this.props.createType} />
           <CreateDomainForm dispatch={this.props.dispatch} persons={this.props.persons} />
         </div>);
       case 'organization':
         return (<div>
-          <DataList fields={this.props.organizations} />
+          <DataList fields={this.props.organizations} type={this.props.createType} />
           <CreateOrganizationForm dispatch={this.props.dispatch} persons={this.props.persons} />
         </div>);
       case 'person':
         return (
           <div>
-            <DataList fields={this.props.persons} />
-            <CreatePersonForm dispatch={this.props.dispatch} />
+            <DataList fields={this.props.persons} type={this.props.createType} dispatch={this.props.dispatch} />
+            <CreatePersonForm dispatch={this.props.dispatch} editFocus={this.props.editFocus} />
           </div>);
       case 'province':
         return (
           <div>
-            <DataList fields={this.props.provinces} />
+            <DataList fields={this.props.provinces} type={this.props.createType} />
             <CreateProvinceForm
               dispatch={this.props.dispatch}
               persons={this.props.persons}
@@ -43,7 +43,8 @@ class CreateDashboard extends PureComponent {
   }
 
   render() {
-    return (<div>{!!this.props.createType ? <div>{this.getCreateType()}</div> :
+    return (<div>{!!this.props.createType ?
+      <div>{this.getCreateType()}</div> :
       <GetCreateType dispatch={this.props.dispatch} />}</div>);
   }
 }
@@ -55,9 +56,12 @@ function mapStateToProps(state) {
     organizations: state.getIn(['landing', 'organizations']),
     domains: state.getIn(['landing', 'domains']),
     provinces: state.getIn(['landing', 'provinces']),
+    editFocus: state.getIn(['landing', 'editFocus']),
   };
 }
 
-export const CreateDashboardContainer = connect(
+const CreateDashboardContainer = connect(
   mapStateToProps,
 )(CreateDashboard);
+
+export default CreateDashboardContainer;

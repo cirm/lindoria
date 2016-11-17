@@ -8,6 +8,7 @@ import SelectField from 'material-ui/SelectField';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
 import { createOrganization } from './lCreateActionCreators';
+import styles from './lActionContainer.styl';
 
 
 const renderTextField = field => (
@@ -48,7 +49,7 @@ class CreateOrganization extends PureComponent {
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
-      <Paper className="createOrganization" zdepth={1} >
+      <Paper className={styles.root} zdepth={1} >
         <Toolbar className="toolBar" >
           <ToolbarGroup >
             <ToolbarTitle text="Enter Organization details" />

@@ -8,6 +8,7 @@ import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import AccountBalance from 'material-ui/svg-icons/action/account-balance';
 import Link from 'react-router/lib/Link';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import browserHistory from 'react-router/lib/browserHistory';
 import PureComponent from '../lib/PureComponent';
 import { getContent } from '../landingBoard/lLandingActionCreators';
@@ -83,7 +84,7 @@ export class Header extends PureComponent {
 }
 
 Header.propTypes = {
-  profile: PropTypes.object,
+  profile: ImmutablePropTypes.map,
   dispatch: PropTypes.func,
 };
 

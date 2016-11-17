@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
+import browserHistory from 'react-router/lib/browserHistory';
 import { AUTHENTICATE, LOGIN, LOGOUT } from './lAuthConstants';
 import decodeProfile from './lAuthToken';
-import browserHistory from 'react-router/lib/browserHistory';
 
 const tokenKey = 'lindoriaToken';
 

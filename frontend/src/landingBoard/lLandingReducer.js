@@ -4,8 +4,9 @@ import {
   GET_CONTENT,
   BR_DATA,
   TOGGLE_CREATE_MENU,
-  TOGGLE_CREATE_MODAL,
 } from './lLandingActionConstants';
+
+const editPerson = (state, data) => state.set('editFocus', data.set('type', 'person'));
 
 const updateFocus = (state, data) => state.set('focus', fromJS(data));
 
@@ -29,6 +30,8 @@ function landingReducer(state = new Map(), action) {
       return getContent(state);
     case BR_DATA:
       return dataUpdate(state, action.data);
+    case 'EDIT_PERSON':
+      return editPerson(state, action.data);
     default:
       return state;
   }

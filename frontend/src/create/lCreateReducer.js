@@ -1,4 +1,4 @@
-import { Map, toJS } from 'immutable';
+import { Map } from 'immutable';
 import { CREATE_TYPE } from './lCreateActionConstants';
 
 const setType = (state, type) => state.set('type', type);
