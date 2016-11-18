@@ -8,6 +8,8 @@ import {
 
 const editPerson = (state, data) => state.set('editFocus', data.set('type', 'person'));
 
+const removeEditPerson = state => state.delete('editFocus');
+
 const updateFocus = (state, data) => state.set('focus', fromJS(data));
 
 const dataUpdate = (state, data) => state
@@ -30,8 +32,10 @@ function landingReducer(state = new Map(), action) {
       return getContent(state);
     case BR_DATA:
       return dataUpdate(state, action.data);
-    case 'EDIT_PERSON':
+    case 'LOAD_EDIT_PERSON':
       return editPerson(state, action.data);
+    case 'REMOVE_EDIT_PERSON':
+      return removeEditPerson(state, action.data);
     default:
       return state;
   }

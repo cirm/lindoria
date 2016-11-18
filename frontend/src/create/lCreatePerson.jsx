@@ -6,7 +6,7 @@ import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
-import { createPerson } from './lCreateActionCreators';
+import { createPerson, editPerson, stopEditPerson } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
 const renderTextField = field => (
@@ -28,6 +28,10 @@ class CreatePerson extends PureComponent {
     return this.isEdit() ? 'Edit' : 'Save';
   }
 
+  stopEdit() {
+    return this.props.dispatch(stopEditPerson());
+  }
+
   isEdit() {
     if (!this.props.editFocus) return false;
     return this.props.editFocus.get('type') === 'person';
@@ -35,7 +39,7 @@ class CreatePerson extends PureComponent {
 
   savePerson(values) {
     this.isEdit() ?
-      console.log(values) :
+      this.props.dispatch(editPerson(values)) :
       this.props.dispatch(createPerson(values));
   }
 
@@ -61,6 +65,9 @@ class CreatePerson extends PureComponent {
             />
           </div>
           <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
+          {this.isEdit() ?
+            <RaisedButton label="Reset" type="button" onTouchTap={() => this.stopEdit()} style={{ margin: 12 }} /> :
+            null}
         </form>
       </Paper>
     );
@@ -68,7 +75,9 @@ class CreatePerson extends PureComponent {
 }
 
 const CreatePersonForm = reduxForm({
-  form: ' createPerson',
+  form: 'createPerson',
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: false,
 })(CreatePerson);
 
 const CreatePersonContainer = connect(

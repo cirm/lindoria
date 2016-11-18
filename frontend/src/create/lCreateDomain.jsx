@@ -4,7 +4,7 @@ import SelectField from 'material-ui/SelectField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
-import { Field, reduxForm } from 'redux-form/immutable';
+import { Field, reduxForm, reset } from 'redux-form/immutable';
 import MenuItem from 'material-ui/MenuItem';
 import PureComponent from '../lib/PureComponent';
 import { createDomain } from './lCreateActionCreators';

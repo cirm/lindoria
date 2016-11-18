@@ -2,7 +2,14 @@ import mapValues from 'lodash/mapValues';
 import { attachAuthEvents, checkToken } from './authEvents';
 import { logger } from '../utilities/winston';
 import { ERROR } from '../constants';
-import { getContent, createPerson, createDomain, createOrg, createProvince } from './lindoriaEvents';
+import {
+  getContent,
+  createPerson,
+  createDomain,
+  createOrg,
+  createProvince,
+  editPerson,
+} from './lindoriaEvents';
 
 const testingEvent = socket => socket.emit('tested');
 
@@ -13,11 +20,12 @@ const protectedRoutes = {
   CREATE_ORGANIZATION: createOrg,
   CREATE_DOMAIN: createDomain,
   CREATE_PROVINCE: createProvince,
+  EDIT_PERSON: editPerson,
 };
 
 const attachProtectedEventsToSocket = (socket) => {
   mapValues(protectedRoutes, (fn, key) =>
-    socket.on(key, async (data) => {
+    socket.on(key, async(data) => {
       if (!data || !data.token) {
         socket.emit(ERROR, 'Authentication error');
         return;

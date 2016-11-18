@@ -1,4 +1,10 @@
-import { CREATE_TYPE, CREATE_PERSON, CREATE_ORGANIZATION, CREATE_DOMAIN, CREATE_PROVINCE } from './lCreateActionConstants';
+import {
+  CREATE_TYPE,
+  CREATE_PERSON,
+  CREATE_ORGANIZATION,
+  CREATE_DOMAIN,
+  CREATE_PROVINCE,
+} from './lCreateActionConstants';
 
 export function setCreateType(type) {
   return {
@@ -39,9 +45,23 @@ export function createProvince(values) {
   };
 }
 
+export function stopEditPerson() {
+  return {
+    type: 'REMOVE_EDIT_PERSON',
+  };
+}
+
 export function startEditPerson(data) {
   return {
-    type: 'EDIT_PERSON',
+    type: 'LOAD_EDIT_PERSON',
     data,
+  };
+}
+
+export function editPerson(payload) {
+  return {
+    type: 'EDIT_PERSON',
+    meta: { lindoria: true },
+    data: payload.delete('type'),
   };
 }

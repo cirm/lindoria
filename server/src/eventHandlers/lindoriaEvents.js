@@ -31,7 +31,7 @@ export const createOrg = async(socket, data) => {
   await getContent(socket);
 };
 
-export const createProvince = async(socket, data, roles) => {
+export const createProvince = async(socket, data) => {
   data.visible = !data.visible ? true : data.visible;
   const start = new Date();
   await queryFunction('empires.create_province', [data.pname, data.display, data.level, data.regent, data.loyalty, data.domain, data.visible, data.abbr]);
@@ -48,3 +48,10 @@ export const createDomain = async(socket, data) => {
   await getContent(socket);
 };
 
+export const editPerson = async(socket, data) => {
+  const start = new Date();
+  await queryFunction('empires.update_person', [data.pname, data.display]);
+  const finish = new Date();
+  logger.info(`editPerson took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
+  await getContent(socket);
+};
