@@ -6,7 +6,7 @@ import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
-import { createPerson, editPerson, stopEditPerson } from './lCreateActionCreators';
+import { createPerson, editPerson, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
 const renderTextField = field => (
@@ -24,12 +24,20 @@ class CreatePerson extends PureComponent {
     this.chainBind(['savePerson']);
   }
 
+  componentDidUpdate() {
+    if (this.isEdit()) {
+      this.props.initialize(this.props.editFocus);
+    }
+  }
+
   getLabel() {
     return this.isEdit() ? 'Edit' : 'Save';
   }
 
-  stopEdit() {
-    return this.props.dispatch(stopEditPerson());
+  stopEdit(change) {
+    this.props.dispatch(stopEdit());
+    change('pname', '');
+    change('display', '');
   }
 
   isEdit() {
@@ -44,7 +52,7 @@ class CreatePerson extends PureComponent {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, change } = this.props;
     return (
       <Paper className={styles.root} zdepth={1} >
         <Toolbar className="toolBar" >
@@ -55,8 +63,7 @@ class CreatePerson extends PureComponent {
         <form className="personForm" onSubmit={handleSubmit(this.savePerson)} >
           <div>
             <Field
-              name="pname" component={renderTextField} label="Unique name"
-              disabled={this.isEdit()}
+              name="pname" component={renderTextField} label="Unique name" disabled={this.isEdit()}
             />
           </div>
           <div>
@@ -66,7 +73,9 @@ class CreatePerson extends PureComponent {
           </div>
           <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
           {this.isEdit() ?
-            <RaisedButton label="Reset" type="button" onTouchTap={() => this.stopEdit()} style={{ margin: 12 }} /> :
+            <RaisedButton label="Reset" type="button" onTouchTap={() => this.stopEdit(change)}
+                          style={{ margin: 12 }}
+            /> :
             null}
         </form>
       </Paper>
@@ -84,4 +93,4 @@ const CreatePersonContainer = connect(
   state => ({ initialValues: state.getIn(['landing', 'editFocus']) }),
 )(CreatePersonForm);
 
-export default CreatePersonContainer;
+export default CreatePersonForm;

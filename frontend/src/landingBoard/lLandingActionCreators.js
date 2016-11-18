@@ -1,5 +1,5 @@
 import {
-  SET_FOCUS,
+  SET_LANDING_FOCUS,
   GET_CONTENT,
   BR_DATA,
   TOGGLE_CREATE_MENU,
@@ -7,7 +7,7 @@ import {
 
 export function setFocus(data) {
   return {
-    type: SET_FOCUS,
+    type: SET_LANDING_FOCUS,
     data,
   };
 }

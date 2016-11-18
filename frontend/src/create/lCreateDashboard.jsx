@@ -13,25 +13,53 @@ class CreateDashboard extends PureComponent {
     switch (this.props.createType) {
       case 'domain':
         return (<div>
-          <DataList fields={this.props.domains} type={this.props.createType} />
-          <CreateDomainForm dispatch={this.props.dispatch} persons={this.props.persons} />
+          <DataList
+            fields={this.props.domains}
+            type={this.props.createType}
+            dispatch={this.props.dispatch}
+          />
+          <CreateDomainForm
+            dispatch={this.props.dispatch}
+            persons={this.props.persons}
+            editFocus={this.props.editFocus}
+          />
         </div>);
       case 'organization':
         return (<div>
-          <DataList fields={this.props.organizations} type={this.props.createType} />
-          <CreateOrganizationForm dispatch={this.props.dispatch} persons={this.props.persons} />
+          <DataList
+            fields={this.props.organizations}
+            type={this.props.createType}
+            dispatch={this.props.dispatch}
+          />
+          <CreateOrganizationForm
+            dispatch={this.props.dispatch}
+            persons={this.props.persons}
+            editFocus={this.props.editFocus}
+          />
         </div>);
       case 'person':
         return (
           <div>
-            <DataList fields={this.props.persons} type={this.props.createType} dispatch={this.props.dispatch} />
-            <CreatePersonForm dispatch={this.props.dispatch} editFocus={this.props.editFocus} />
+            <DataList
+              fields={this.props.persons}
+              type={this.props.createType}
+              dispatch={this.props.dispatch}
+            />
+            <CreatePersonForm
+              dispatch={this.props.dispatch}
+              editFocus={this.props.editFocus}
+            />
           </div>);
       case 'province':
         return (
           <div>
-            <DataList fields={this.props.provinces} type={this.props.createType} />
+            <DataList
+              fields={this.props.provinces}
+              type={this.props.createType}
+              dispatch={this.props.dispatch}
+            />
             <CreateProvinceForm
+              editFocus={this.props.editFocus}
               dispatch={this.props.dispatch}
               persons={this.props.persons}
               domains={this.props.domains}
@@ -43,7 +71,7 @@ class CreateDashboard extends PureComponent {
   }
 
   render() {
-    return (<div>{!!this.props.createType ?
+    return (<div>{this.props.createType ?
       <div>{this.getCreateType()}</div> :
       <GetCreateType dispatch={this.props.dispatch} />}</div>);
   }

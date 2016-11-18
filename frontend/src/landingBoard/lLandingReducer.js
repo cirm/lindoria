@@ -1,14 +1,16 @@
 import { Map, fromJS } from 'immutable';
 import {
-  SET_FOCUS,
+  SET_LANDING_FOCUS,
   GET_CONTENT,
   BR_DATA,
   TOGGLE_CREATE_MENU,
+  LOAD_EDIT_FOCUS,
+  REMOVE_EDIT_FOCUS,
 } from './lLandingActionConstants';
 
-const editPerson = (state, data) => state.set('editFocus', data.set('type', 'person'));
+const startEditFocus = (state, data) => state.set('editFocus', data);
 
-const removeEditPerson = state => state.delete('editFocus');
+const removeEditFocus = state => state.delete('editFocus');
 
 const updateFocus = (state, data) => state.set('focus', fromJS(data));
 
@@ -26,16 +28,16 @@ function landingReducer(state = new Map(), action) {
   switch (action.type) {
     case TOGGLE_CREATE_MENU:
       return toggleCreateMenu(state, action.data);
-    case SET_FOCUS:
+    case SET_LANDING_FOCUS:
       return updateFocus(state, action.data);
     case GET_CONTENT:
       return getContent(state);
     case BR_DATA:
       return dataUpdate(state, action.data);
-    case 'LOAD_EDIT_PERSON':
-      return editPerson(state, action.data);
-    case 'REMOVE_EDIT_PERSON':
-      return removeEditPerson(state, action.data);
+    case LOAD_EDIT_FOCUS:
+      return startEditFocus(state, action.data);
+    case REMOVE_EDIT_FOCUS:
+      return removeEditFocus(state, action.data);
     default:
       return state;
   }

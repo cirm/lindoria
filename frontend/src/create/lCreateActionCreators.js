@@ -45,15 +45,15 @@ export function createProvince(values) {
   };
 }
 
-export function stopEditPerson() {
+export function stopEdit() {
   return {
-    type: 'REMOVE_EDIT_PERSON',
+    type: 'REMOVE_EDIT_FOCUS',
   };
 }
 
-export function startEditPerson(data) {
+export function startEdit(data) {
   return {
-    type: 'LOAD_EDIT_PERSON',
+    type: 'LOAD_EDIT_FOCUS',
     data,
   };
 }

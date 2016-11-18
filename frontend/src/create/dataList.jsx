@@ -10,7 +10,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
-import { startEditPerson } from './lCreateActionCreators';
+import { startEdit } from './lCreateActionCreators';
 import styles from './lListContainer.styl';
 
 let columnHeaders = [];
@@ -40,15 +40,7 @@ const filterStyle = {
   fontSize: '1em',
 };
 
-const editRow = (props, item) => {
-  switch (props.type) {
-    case 'person':
-      props.dispatch(startEditPerson(item));
-      break;
-    default:
-      break;
-  }
-};
+const editRow = (props, item) => props.dispatch(startEdit(item.set('type', props.type)));
 
 const dataList = (props) => {
   columnHeaders = [];
