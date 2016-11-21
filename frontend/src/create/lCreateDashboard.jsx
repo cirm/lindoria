@@ -3,10 +3,10 @@ import connect from 'react-redux/lib/components/connect';
 import GetCreateType from './lGetCreateType';
 import DataList from './dataList';
 import PureComponent from '../lib/PureComponent';
-import CreatePersonForm from './lCreatePerson';
+import PersonForm from './lPersonData';
 import CreateOrganizationForm from './lCreateOrganization';
 import CreateDomainForm from './lCreateDomain';
-import CreateProvinceForm from './lCreateProvince';
+import ProvinceForm from './lProvinceData';
 
 class CreateDashboard extends PureComponent {
   getCreateType() {
@@ -45,7 +45,7 @@ class CreateDashboard extends PureComponent {
               type={this.props.createType}
               dispatch={this.props.dispatch}
             />
-            <CreatePersonForm
+            <PersonForm
               dispatch={this.props.dispatch}
               editFocus={this.props.editFocus}
             />
@@ -58,7 +58,7 @@ class CreateDashboard extends PureComponent {
               type={this.props.createType}
               dispatch={this.props.dispatch}
             />
-            <CreateProvinceForm
+            <ProvinceForm
               editFocus={this.props.editFocus}
               dispatch={this.props.dispatch}
               persons={this.props.persons}

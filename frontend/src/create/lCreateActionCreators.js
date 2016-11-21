@@ -65,3 +65,11 @@ export function editPerson(payload) {
     data: payload.delete('type'),
   };
 }
+
+export function editProvince(payload) {
+  return {
+    type: 'EDIT_PROVINCE',
+    meta: { lindoria: true },
+    data: payload.delete('type'),
+  };
+}

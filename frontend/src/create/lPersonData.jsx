@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { connect } from 'react-redux';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
 import { createPerson, editPerson, stopEdit } from './lCreateActionCreators';
@@ -22,12 +22,6 @@ class CreatePerson extends PureComponent {
   constructor(props) {
     super(props);
     this.chainBind(['savePerson']);
-  }
-
-  componentDidUpdate() {
-    if (this.isEdit()) {
-      this.props.initialize(this.props.editFocus);
-    }
   }
 
   getLabel() {
@@ -55,7 +49,7 @@ class CreatePerson extends PureComponent {
     const { handleSubmit, change } = this.props;
     return (
       <Paper className={styles.root} zdepth={1} >
-        <Toolbar className="toolBar" >
+        <Toolbar >
           <ToolbarGroup >
             <ToolbarTitle text={this.isEdit() ? 'Edit person details' : 'Enter Person details'} />
           </ToolbarGroup>
@@ -73,8 +67,11 @@ class CreatePerson extends PureComponent {
           </div>
           <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
           {this.isEdit() ?
-            <RaisedButton label="Reset" type="button" onTouchTap={() => this.stopEdit(change)}
-                          style={{ margin: 12 }}
+            <RaisedButton
+              label="Reset"
+              type="button"
+              onTouchTap={() => this.stopEdit(change)}
+              style={{ margin: 12 }}
             /> :
             null}
         </form>
@@ -93,4 +90,4 @@ const CreatePersonContainer = connect(
   state => ({ initialValues: state.getIn(['landing', 'editFocus']) }),
 )(CreatePersonForm);
 
-export default CreatePersonForm;
+export default CreatePersonContainer;

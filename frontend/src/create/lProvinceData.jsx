@@ -3,18 +3,19 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
+import { connect } from 'react-redux';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
-import { createProvince } from './lCreateActionCreators';
+import { createProvince, editProvince, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
 
 const renderTextField = field => (
   <TextField
     floatingLabelText={field.label}
-    hintText={field.label}
+    disabled={field.disabled}
     errorText={field.touched && field.error}
     {...field.input}
   />
@@ -60,10 +61,6 @@ class CreateProvince extends PureComponent {
     this.chainBind(['saveProvince']);
   }
 
-  saveProvince(values) {
-    this.props.dispatch(createProvince(values));
-  }
-
   getPersons() {
     return this.props.persons || [];
   }
@@ -72,18 +69,42 @@ class CreateProvince extends PureComponent {
     return this.props.domains || [];
   }
 
+  getLabel() {
+    return this.isEdit() ? 'Edit' : 'Save';
+  }
+
+  stopEdit(change) {
+    this.props.dispatch(stopEdit());
+    //change('pname', '');
+    //change('display', '');
+  }
+
+  isEdit() {
+    if (!this.props.editFocus) return false;
+    return this.props.editFocus.get('type') === 'province';
+  }
+
+
+  saveProvince(values) {
+    this.isEdit() ?
+      this.props.dispatch(editProvince(values)) :
+      this.props.dispatch(createProvince(values));
+  }
+
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, pristine, change, submitting } = this.props;
     return (
       <Paper className={styles.root} zdepth={1} >
-        <Toolbar className="toolBar" >
+        <Toolbar >
           <ToolbarGroup >
-            <ToolbarTitle text="Enter Province details" />
+            <ToolbarTitle
+              text={this.isEdit() ? `Edit ${this.props.editFocus.get('display')} details` : 'Enter Domain details'}
+            />
           </ToolbarGroup>
         </Toolbar>
         <form className="provinceForm" onSubmit={handleSubmit(this.saveProvince)} >
           <div>
-            <Field name="pname" component={renderTextField} label="Unique key" />
+            <Field name="pname" component={renderTextField} disabled={this.isEdit()} label="Unique key" />
           </div>
           <div>
             <Field name="display" component={renderTextField} label="Province name" />
@@ -114,16 +135,31 @@ class CreateProvince extends PureComponent {
           <div>
             <Field name="abbr" component={renderTextField} label="Shortened form" />
           </div>
-          <RaisedButton label="Save" type="submit" primary style={{ margin: 12 }} />
+          <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
+          {this.isEdit() ?
+            <RaisedButton
+              label="Reset"
+              type="button"
+              onTouchTap={() => this.stopEdit(change)}
+              style={{ margin: 12 }}
+            /> :
+            null}
         </form>
       </Paper>
     );
   }
 }
 
-const CreateProvinceContainer = reduxForm({
+const CreateProvinceForm = reduxForm({
   form: 'createProvince',
-  validate,
+  //validate,
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
 })(CreateProvince);
+
+const CreateProvinceContainer = connect(
+  state => ({ initialValues: state.getIn(['landing', 'editFocus']) }),
+)(CreateProvinceForm);
+
 
 export default CreateProvinceContainer;

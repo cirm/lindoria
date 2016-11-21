@@ -1,6 +1,6 @@
 import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import forEach from 'lodash/forEach';
+import forEach from 'lodash/fp/forEach';
 
 export default class PureComponent extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -8,6 +8,6 @@ export default class PureComponent extends React.Component {
   }
 
   chainBind(methods) {
-    forEach(methods, method => this[method] = this[method].bind(this));
+    forEach(method => this[method] = this[method].bind(this))(methods);
   }
 }

@@ -55,3 +55,11 @@ export const editPerson = async(socket, data) => {
   logger.info(`editPerson took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
 };
+
+export const editProvince = async(socket, data) => {
+  const start = new Date();
+  await queryFunction('empires.update_province', [data.pname, data.display, data.level, data.regent, data.loyalty, data.domain, true, data.abbr]);
+  const finish = new Date();
+  logger.info(`editPerson took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
+  await getContent(socket);
+};

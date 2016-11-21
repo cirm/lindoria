@@ -9,6 +9,7 @@ import {
   createOrg,
   createProvince,
   editPerson,
+  editProvince,
 } from './lindoriaEvents';
 
 const testingEvent = socket => socket.emit('tested');
@@ -21,6 +22,7 @@ const protectedRoutes = {
   CREATE_DOMAIN: createDomain,
   CREATE_PROVINCE: createProvince,
   EDIT_PERSON: editPerson,
+  EDIT_PROVINCE: editProvince,
 };
 
 const attachProtectedEventsToSocket = (socket) => {

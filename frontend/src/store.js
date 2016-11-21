@@ -4,9 +4,9 @@ import createStore from 'redux/lib/createStore';
 import applyMiddleware from 'redux/lib/applyMiddleware';
 import installDevTools from 'immutable-devtools';
 import reducers from './reducers';
-import { mapRemoteActions } from './remote/lRemoteActionsListeners';
+import mapRemoteActions from './remote/lRemoteActionsListeners';
 import remoteActionMiddleware from './remote/lRemoteActionMiddleware';
-import { socket } from './remote/lRemoteSocketServer';
+import socket from './remote/lRemoteSocketServer';
 
 const logger = createLogger();
 const middlewares = [logger];

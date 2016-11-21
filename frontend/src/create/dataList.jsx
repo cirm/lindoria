@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
-import map from 'lodash/map';
+import map from 'lodash/fp/map';
 import {
   Table,
   TableBody,
@@ -53,11 +53,11 @@ const dataList = (props) => {
             displaySelectAll={false}
             adjustForCheckbox={false}
           >
-            <TableRow>{map(columnHeaders, header => (
+            <TableRow>{map(header => (
               <TableHeaderColumn key={header} >
                 {<TextField style={filterStyle} className="filterField" floatingLabelText={headerMap[header]} />}
               </TableHeaderColumn>
-            ))}
+            ))(columnHeaders)}
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} >
@@ -65,10 +65,10 @@ const dataList = (props) => {
               <TableRow
                 onTouchTap={() => editRow(props, item)}
                 key={item.get(columnHeaders[0])}
-              >{map(columnHeaders, header =>
+              >{map(header =>
                 <TableRowColumn key={item.get(header)} >
                   {item.get(header)}
-                </TableRowColumn>)}
+                </TableRowColumn>)(columnHeaders)}
               </TableRow>)}
           </TableBody>
         </Table> : <h4>No data to display!</h4>}
