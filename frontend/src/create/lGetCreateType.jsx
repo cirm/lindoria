@@ -3,7 +3,7 @@ import FlatButton from 'material-ui/FlatButton';
 import map from 'lodash/fp/map';
 import { setCreateType } from './lCreateActionCreators';
 
-const types = ['domain', 'person', 'organization'];
+const types = ['domain', 'person', 'organization', 'province'];
 
 const loadCreate = (type, dispatch) => dispatch(setCreateType(type));
 
