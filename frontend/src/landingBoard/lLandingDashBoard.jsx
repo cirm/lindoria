@@ -49,9 +49,9 @@ LandingDashboard.propTypes = {
 function mapStateToProps(state) {
   return {
     focus: state.getIn(['landing', 'focus']),
-    domains: state.getIn(['landing', 'domains']),
-    persons: state.getIn(['landing', 'persons']),
-    provinces: state.getIn(['landing', 'provinces']),
+    domains: state.getIn(['data', 'domains']),
+    persons: state.getIn(['data', 'persons']),
+    provinces: state.getIn(['data', 'provinces']),
     createMenu: state.getIn(['landing', 'createMenu']),
   };
 }

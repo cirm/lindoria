@@ -2,7 +2,6 @@ import { Map, fromJS } from 'immutable';
 import {
   SET_LANDING_FOCUS,
   GET_CONTENT,
-  BR_DATA,
   TOGGLE_CREATE_MENU,
   LOAD_EDIT_FOCUS,
   REMOVE_EDIT_FOCUS,
@@ -13,12 +12,6 @@ const startEditFocus = (state, data) => state.set('editFocus', data);
 const removeEditFocus = state => state.delete('editFocus');
 
 const updateFocus = (state, data) => state.set('focus', fromJS(data));
-
-const dataUpdate = (state, data) => state
-  .set('domains', fromJS(data.domains))
-  .set('provinces', fromJS(data.provinces))
-  .set('organizations', fromJS(data.organizations))
-  .set('persons', fromJS(data.persons));
 
 const getContent = state => state;
 
@@ -32,8 +25,6 @@ function landingReducer(state = new Map(), action) {
       return updateFocus(state, action.data);
     case GET_CONTENT:
       return getContent(state);
-    case BR_DATA:
-      return dataUpdate(state, action.data);
     case LOAD_EDIT_FOCUS:
       return startEditFocus(state, action.data);
     case REMOVE_EDIT_FOCUS:

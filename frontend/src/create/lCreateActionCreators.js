@@ -51,13 +51,6 @@ export function stopEdit() {
   };
 }
 
-export function startEdit(data) {
-  return {
-    type: 'LOAD_EDIT_FOCUS',
-    data,
-  };
-}
-
 export function editPerson(payload) {
   return {
     type: 'EDIT_PERSON',

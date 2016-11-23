@@ -36,7 +36,7 @@ class CreatePerson extends PureComponent {
 
   isEdit() {
     if (!this.props.editFocus) return false;
-    return this.props.editFocus.get('type') === 'person';
+    return this.props.editFocus.get('type') === 'persons';
   }
 
   savePerson(values) {

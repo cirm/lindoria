@@ -62,12 +62,12 @@ export class Header extends PureComponent {
                   anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                 >
                   <MenuItem
-                    primaryText="Create Organization" value="organization"
-                    onTouchTap={() => this.createType('organization')}
+                    primaryText="Create Organization" value="organizations"
+                    onTouchTap={() => this.createType('organizations')}
                   />
                   <MenuItem
-                    primaryText="Create Person" value="person"
-                    onTouchTap={() => this.createType('person')}
+                    primaryText="Create Person" value="persons"
+                    onTouchTap={() => this.createType('persons')}
                   />
                   <Divider />
                   <MenuItem primaryText="Home" containerElement={home} />

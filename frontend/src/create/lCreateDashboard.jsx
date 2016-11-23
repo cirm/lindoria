@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from 'react-redux/lib/components/connect';
 import GetCreateType from './lGetCreateType';
-import DataList from './dataList';
+import DataList from '../dataTable/lDataTable';
 import PureComponent from '../lib/PureComponent';
 import PersonForm from './lPersonData';
 import CreateOrganizationForm from './lCreateOrganization';
@@ -9,62 +9,44 @@ import CreateDomainForm from './lCreateDomain';
 import ProvinceForm from './lProvinceData';
 
 class CreateDashboard extends PureComponent {
+  getColumnHeaders() {
+    console.log('aaa')
+    if (!this.props.createType) return [];
+    const headers = [];
+    this.props[this.props.createType].first().mapKeys(key => headers.push(key));
+    return headers;
+  };
+
   getCreateType() {
     switch (this.props.createType) {
-      case 'domain':
-        return (<div>
-          <DataList
-            fields={this.props.domains}
-            type={this.props.createType}
-            dispatch={this.props.dispatch}
-          />
+      case 'domains':
+        return (
           <CreateDomainForm
             dispatch={this.props.dispatch}
             persons={this.props.persons}
             editFocus={this.props.editFocus}
-          />
-        </div>);
-      case 'organization':
-        return (<div>
-          <DataList
-            fields={this.props.organizations}
-            type={this.props.createType}
-            dispatch={this.props.dispatch}
-          />
+          />);
+      case 'organizations':
+        return (
           <CreateOrganizationForm
             dispatch={this.props.dispatch}
             persons={this.props.persons}
             editFocus={this.props.editFocus}
-          />
-        </div>);
-      case 'person':
+          />);
+      case 'persons':
         return (
-          <div>
-            <DataList
-              fields={this.props.persons}
-              type={this.props.createType}
-              dispatch={this.props.dispatch}
-            />
-            <PersonForm
-              dispatch={this.props.dispatch}
-              editFocus={this.props.editFocus}
-            />
-          </div>);
-      case 'province':
+          <PersonForm
+            dispatch={this.props.dispatch}
+            editFocus={this.props.editFocus}
+          />);
+      case 'provinces':
         return (
-          <div>
-            <DataList
-              fields={this.props.provinces}
-              type={this.props.createType}
-              dispatch={this.props.dispatch}
-            />
-            <ProvinceForm
-              editFocus={this.props.editFocus}
-              dispatch={this.props.dispatch}
-              persons={this.props.persons}
-              domains={this.props.domains}
-            />
-          </div>);
+          <ProvinceForm
+            editFocus={this.props.editFocus}
+            dispatch={this.props.dispatch}
+            persons={this.props.persons}
+            domains={this.props.domains}
+          />);
       default:
         return null;
     }
@@ -72,18 +54,28 @@ class CreateDashboard extends PureComponent {
 
   render() {
     return (<div>{this.props.createType ?
-      <div>{this.getCreateType()}</div> :
+      <div>
+        <DataList
+          fields={this.props[this.props.createType]}
+          type={this.props.createType}
+          tableData={this.props.tableData}
+          dispatch={this.props.dispatch}
+          columnHeaders={this.getColumnHeaders()}
+        />
+        {this.getCreateType()}
+      </div> :
       <GetCreateType dispatch={this.props.dispatch} />}</div>);
   }
 }
 
 function mapStateToProps(state) {
   return {
+    tableData: state.getIn(['data', 'table']),
     createType: state.getIn(['create', 'type']),
-    persons: state.getIn(['landing', 'persons']),
-    organizations: state.getIn(['landing', 'organizations']),
-    domains: state.getIn(['landing', 'domains']),
-    provinces: state.getIn(['landing', 'provinces']),
+    persons: state.getIn(['data', 'persons']),
+    organizations: state.getIn(['data', 'organizations']),
+    domains: state.getIn(['data', 'domains']),
+    provinces: state.getIn(['data', 'provinces']),
     editFocus: state.getIn(['landing', 'editFocus']),
   };
 }

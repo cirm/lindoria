@@ -78,7 +78,7 @@ class CreateProvince extends PureComponent {
 
   isEdit() {
     if (!this.props.editFocus) return false;
-    return this.props.editFocus.get('type') === 'province';
+    return this.props.editFocus.get('type') === 'provinces';
   }
 
   saveProvince(values) {
