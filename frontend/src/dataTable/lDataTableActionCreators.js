@@ -1,8 +1,9 @@
-export function applyFilter(filter, target) {
+export function applyFilter(filter, field, dataType) {
   return {
     type: 'FILTER_TABLE',
     filter,
-    target,
+    field,
+    dataType,
   };
 }
 

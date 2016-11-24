@@ -10,11 +10,9 @@ import ProvinceForm from './lProvinceData';
 
 class CreateDashboard extends PureComponent {
   getColumnHeaders() {
-    console.log('aaa')
     if (!this.props.createType) return [];
-    const headers = [];
-    this.props[this.props.createType].first().mapKeys(key => headers.push(key));
-    return headers;
+    if (this.props[this.props.createType].size < 1) return [];
+    return this.props[this.props.createType].first().keySeq().toArray();
   };
 
   getCreateType() {
@@ -70,9 +68,9 @@ class CreateDashboard extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    tableData: state.getIn(['data', 'table']),
     createType: state.getIn(['create', 'type']),
     persons: state.getIn(['data', 'persons']),
+    tableData: state.getIn(['data', 'table']),
     organizations: state.getIn(['data', 'organizations']),
     domains: state.getIn(['data', 'domains']),
     provinces: state.getIn(['data', 'provinces']),

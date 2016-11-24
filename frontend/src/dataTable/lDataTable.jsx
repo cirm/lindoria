@@ -35,9 +35,14 @@ const headerMap = {
 };
 
 class DataTable extends PureComponent {
-  setFilter(event, type) {
-    console.log(event.target.value);
-    console.log(type);
+  getData() {
+    if (!this.props.tableData) return this.props.fields;
+    if (this.props.tableData.first().keySeq().equals(this.props.fields.first().keySeq())) return this.props.tableData;
+    return this.props.fields;
+  }
+
+  setFilter(event, field) {
+    return this.props.dispatch(applyFilter(event.target.value, field, this.props.type));
   };
 
   editRow(item) {
@@ -64,7 +69,7 @@ class DataTable extends PureComponent {
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false} >
-              {this.props.fields.map(item =>
+              {this.getData().map(item =>
                 <TableRow
                   onTouchTap={() => this.editRow(item)}
                   key={item.get(this.props.columnHeaders[0])}
