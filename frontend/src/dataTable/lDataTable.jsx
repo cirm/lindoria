@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
 import map from 'lodash/fp/map';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import {
   Table,
   TableBody,
@@ -10,7 +11,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
-import { startEdit, applyFilter, setTableData } from './lDataTableActionCreators';
+import { startEdit, applyFilter } from './lDataTableActionCreators';
 import PureComponent from '../lib/PureComponent';
 import styles from './lListContainer.styl';
 
@@ -37,13 +38,15 @@ const headerMap = {
 class DataTable extends PureComponent {
   getData() {
     if (!this.props.tableData) return this.props.fields;
-    if (this.props.tableData.first().keySeq().equals(this.props.fields.first().keySeq())) return this.props.tableData;
+    if (this.props.tableData.first().keySeq().equals(this.props.fields.first().keySeq())) {
+      return this.props.tableData;
+    }
     return this.props.fields;
   }
 
   setFilter(event, field) {
     return this.props.dispatch(applyFilter(event.target.value, field, this.props.type));
-  };
+  }
 
   editRow(item) {
     this.props.dispatch(startEdit(item.set('type', this.props.type)));
@@ -86,7 +89,13 @@ class DataTable extends PureComponent {
 }
 
 DataTable.propTypes = {
-  fields: PropTypes.object,
+  fields: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.map,
+  ),
+  columnHeaders: PropTypes.arrayOf(PropTypes.string),
+  tableData: ImmutablePropTypes.list,
+  dispatch: PropTypes.func,
+  type: PropTypes.string,
 };
 
 export default DataTable;

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import connect from 'react-redux/lib/components/connect';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import GetCreateType from './lGetCreateType';
 import DataList from '../dataTable/lDataTable';
 import PureComponent from '../lib/PureComponent';
@@ -13,7 +14,7 @@ class CreateDashboard extends PureComponent {
     if (!this.props.createType) return [];
     if (this.props[this.props.createType].size < 1) return [];
     return this.props[this.props.createType].first().keySeq().toArray();
-  };
+  }
 
   getCreateType() {
     switch (this.props.createType) {
@@ -77,6 +78,15 @@ function mapStateToProps(state) {
     editFocus: state.getIn(['landing', 'editFocus']),
   };
 }
+
+CreateDashboard.propTypes = {
+  createType: PropTypes.string,
+  tableData: ImmutablePropTypes.list,
+  dispatch: PropTypes.func,
+  persons: ImmutablePropTypes.list,
+  domains: ImmutablePropTypes.list,
+  editFocus: PropTypes.string,
+};
 
 const CreateDashboardContainer = connect(
   mapStateToProps,
