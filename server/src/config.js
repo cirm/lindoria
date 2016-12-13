@@ -1,4 +1,4 @@
-import path from 'path';
+const path = require('path');
 
 const env = process.env.NODE_ENV || 'development';
 const rootPath = path.normalize(`${__dirname}/../`);
@@ -24,4 +24,4 @@ const config = {
   },
 };
 
-export default config[env];
+module.exports = config[env];

@@ -1,6 +1,6 @@
 /* global describe it */
-import { expect } from 'chai';
-import io from 'socket.io-client';
+const expect = require('chai').expect;
+const io = require('socket.io-client');
 
 const socketUrl = 'http://0.0.0.0:4545';
 const options = {

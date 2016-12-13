@@ -1,7 +1,10 @@
-import Server from 'socket.io';
-import socketEvents from './eventHandlers/socketEvents';
+const Server = require('socket.io');
+const socketEvents = require('./eventHandlers/socketEvents');
 
-export const startServer = () => {
+const startServer = () => {
   const io = new Server().attach(4545);
   io.on('connection', socketEvents);
 };
+
+module.exports = startServer;
+

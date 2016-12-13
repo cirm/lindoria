@@ -1,5 +1,7 @@
-export const LOGIN = 'LOGIN';
-export const AUTHENTICATE = 'AUTHENTICATE';
-export const TOKEN = 'TOKEN';
-export const UNAUTHORIZED = 'UNAUTHORIZED';
-export const ERROR = 'ERROR';
+module.exports = {
+  LOGIN: 'LOGIN',
+  AUTHENTICATE: 'AUTHENTICATE',
+  TOKEN: 'TOKEN',
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  ERROR: 'ERROR',
+};

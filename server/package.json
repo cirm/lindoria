@@ -8,8 +8,8 @@
   },
   "scripts": {
     "prestart": "npm run db:migrate",
-    "start": "nodemon --exec babel-node -- index.js",
-    "test": "mocha --compilers js:babel-core/register --recursive",
+    "start": "nodemon --harmony --harmony_async_await --trace-warnings -L --  index.js",
+    "test": "mocha --harmony --harmony_async_await",
     "test:watch": "npm run test -- --watch",
     "db:migrate": "db-migrate up",
     "db:revert": "db-migrate down",
@@ -18,38 +18,24 @@
   "author": "madis jullinen",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^0.8.5",
-    "bluebird": "^3.3.5",
+    "bcrypt": "1.0.1",
+    "bluebird": "3.4.6",
     "db-migrate": "^0.10.0-beta.20",
     "db-migrate-pg": "^0.1.11",
-    "jsonwebtoken": "^7.1.9",
-    "lodash": "^4.11.1",
-    "moment": "^2.13.0",
-    "nodemon": "^1.9.1",
-    "pg-monitor": "^0.5.2",
-    "pg-promise": "^5.3.5",
-    "socket.io": "latest",
-    "socket.io-client": "latest",
-    "winston": "^2.2.0"
-  },
-  "babel": {
-    "presets": [
-      "node6"
-    ],
-    "plugins": [
-      "transform-async-to-generator"
-    ]
+    "jsonwebtoken": "7.2.1",
+    "lodash": "4.17.2",
+    "moment": "2.17.1",
+    "nodemon": "1.11.0",
+    "pg-monitor": "0.6.1",
+    "pg-promise": "5.5.0",
+    "socket.io": "1.7.2",
+    "socket.io-client": "1.7.2",
+    "winston": "2.3.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.18.2",
-    "babel-plugin-transform-async-to-generator": "^6.16.0",
-    "babel-preset-node6": "^11.0.0",
-    "babel-register": "^6.18.0",
-    "chai": "^3.5.0",
+    "chai": "3.5.0",
     "chai-as-promised": "^6.0.0",
-    "eslint": "^3.9.1",
-    "mocha": "^3.1.2",
-    "webpack": "^1.13.3"
+    "mocha": "3.2.0",
+    "webpack": "1.14.0"
   }
 }

@@ -1,6 +1,11 @@
-import Promise from 'bluebird';
-import bcrypt from 'bcrypt';
-Promise.promisifyAll(bcrypt);
+const Promise = require('bluebird');
+const bcrypt = Promise.promisifyAll(require('bcrypt'));
 
-export const createSalt = async() => await bcrypt.genSaltAsync(12);
-export const compareHash = async(password, hashedPassword) => await bcrypt.compareAsync(password, hashedPassword);
+const createSalt = async () => await bcrypt.genSaltAsync(12);
+const compareHash = async (password, hashedPassword) =>
+  await bcrypt.compareAsync(password, hashedPassword);
+
+module.exports = {
+  createSalt,
+  compareHash,
+};

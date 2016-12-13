@@ -1,7 +1,7 @@
-import Promise from 'bluebird';
-import monitor from 'pg-monitor';
-import Pgp from 'pg-promise';
-import conf from '../../src/config';
+const Promise = require('bluebird');
+const monitor = require('pg-monitor');
+const Pgp = require('pg-promise');
+const conf = require('../config');
 
 const options = { promiseLib: Promise };
 monitor.attach(options);
@@ -18,7 +18,11 @@ const cn = {
 
 const pool = pgp(cn);
 
-export const queryFunction = (string, values) => pool.func(string, values);
-export const query = (string, values) => pool.query(string, values);
+const queryFunction = (string, values) => pool.func(string, values);
+const query = (string, values) => pool.query(string, values);
 // export const transaction = (string, values) => pool.tx(string, values);
 
+module.exports = {
+  query,
+  queryFunction,
+};

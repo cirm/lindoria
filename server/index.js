@@ -1,6 +1,6 @@
-import { logger } from './src/utilities/winston';
-import conf from './src/config';
-import { startServer } from './src/socketServer';
+const logger = require('./src/utilities/winston');
+const conf = require('./src/config');
+const startServer = require('./src/socketServer');
 
 startServer();
 

@@ -1,9 +1,9 @@
-import { queryFunction } from '../db/postgres';
-import { logger } from '../utilities/winston';
+const db = require('../db/postgres');
+const logger = require('../utilities/winston');
 
-export const getContent = async(socket) => {
+const getContent = async(socket) => {
   const start = new Date();
-  const rawData = await queryFunction('empires.get_br_data', 'true');
+  const rawData = await db.queryFunction('empires.get_br_data', 'true');
   const data = rawData[0];
   socket.emit('BR_DATA', {
     domains: data.domains || [],
@@ -15,51 +15,61 @@ export const getContent = async(socket) => {
   logger.info(`dataQuery took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
 };
 
-export const createPerson = async(socket, data) => {
+const createPerson = async(socket, data) => {
   const start = new Date();
-  await queryFunction('empires.create_person', [data.pname, data.display]);
+  await db.queryFunction('empires.create_person', [data.pname, data.display]);
   const finish = new Date();
   logger.info(`savePerson took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
 };
 
-export const createOrg = async(socket, data) => {
+const createOrg = async(socket, data) => {
   const start = new Date();
-  await queryFunction('empires.create_organization', [data.oname, data.display, data.owner, data.abbr, data.treasury]);
+  await db.queryFunction('empires.create_organization', [data.oname, data.display, data.owner, data.abbr, data.treasury]);
   const finish = new Date();
   logger.info(`saveOrg took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
 };
 
-export const createProvince = async(socket, data) => {
+const createProvince = async(socket, data) => {
   data.visible = !data.visible ? true : data.visible;
   const start = new Date();
-  await queryFunction('empires.create_province', [data.pname, data.display, data.level, data.regent, data.loyalty, data.domain, data.visible, data.abbr]);
+  await db.queryFunction('empires.create_province', [data.pname, data.display, data.level, data.regent, data.loyalty, data.domain, data.visible, data.abbr]);
   const finish = new Date();
   logger.info(`saveProvince took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
 };
 
-export const createDomain = async(socket, data) => {
+const createDomain = async(socket, data) => {
   const start = new Date();
-  await queryFunction('empires.create_domain', [data.dname, data.regent, data.display, data.abbr, data.treasury,]);
+  await db.queryFunction('empires.create_domain', [data.dname, data.regent, data.display, data.abbr, data.treasury,]);
   const finish = new Date();
   logger.info(`saveDomain took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
 };
 
-export const editPerson = async(socket, data) => {
+const editPerson = async(socket, data) => {
   const start = new Date();
-  await queryFunction('empires.update_person', [data.pname, data.display]);
+  await db.queryFunction('empires.update_person', [data.pname, data.display]);
   const finish = new Date();
   logger.info(`editPerson took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
 };
 
-export const editProvince = async(socket, data) => {
+const editProvince = async(socket, data) => {
   const start = new Date();
-  await queryFunction('empires.update_province', [data.pname, data.display, data.level, data.regent, data.loyalty, data.domain, true, data.abbr]);
+  await db.queryFunction('empires.update_province', [data.pname, data.display, data.level, data.regent, data.loyalty, data.domain, true, data.abbr]);
   const finish = new Date();
   logger.info(`editPerson took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
+};
+
+module.exports = {
+  getContent,
+  createPerson,
+  createOrg,
+  createProvince,
+  createDomain,
+  editPerson,
+  editProvince,
 };

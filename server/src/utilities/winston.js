@@ -1,9 +1,9 @@
-import winston from 'winston';
-import moment from 'moment';
+const winston = require('winston');
+const moment = require('moment');
 
 winston.emitErrs = true;
 
-export const logger = new winston.Logger({
+const logger = new winston.Logger({
   transports: [
     new winston.transports.Console({
       level: 'debug',
@@ -16,8 +16,9 @@ export const logger = new winston.Logger({
   exitOnError: false,
 });
 
-export const stream = {
-  write: message => {
-    logger.debug(message.slice(0, -1));
-  },
+const write = message => logger.info(message.slice(0, -1));
+
+module.exports = logger;
+module.exports.stream = {
+  write,
 };

@@ -1,14 +1,12 @@
-import Promise from 'bluebird';
-import JWT from 'jsonwebtoken';
-import { logger } from '../utilities/winston';
-import conf from '../config';
-import { authenticationError, tokenError } from '../utilities/errors';
-import { validatePassword, populateUser } from '../models/userModel';
-import * as db from '../db/postgres';
-import { AUTHENTICATE, TOKEN, UNAUTHORIZED } from '../constants';
+const Promise = require('bluebird');
+const JWT = Promise.promisifyAll(require('jsonwebtoken'));
+const logger = require('../utilities/winston');
+const conf = require('../config');
+const errors = require('../utilities/errors');
+const User = require('../models/userModel');
+const db = require('../db/postgres');
+const eventConstants = require('../constants');
 
-
-Promise.promisifyAll(JWT);
 
 function extractToken(bearerToken) {
   const parts = bearerToken.split(' ');
@@ -18,45 +16,57 @@ function extractToken(bearerToken) {
   return parts[1];
 }
 
-export const checkToken = async (bearer) => {
-  let isAllowed;
+const checkToken = async(bearer) => {
   if (!bearer) return false;
+  let isAllowed;
   try {
     isAllowed = await JWT.verifyAsync(extractToken(bearer), conf.tokenSecret);
   } catch (e) {
-    logger.error(tokenError(e.message).message);
+    logger.error(errors.tokenError(e.message).message);
   }
   return isAllowed;
 };
 
-const authenticate = async (data, socket) => {
-  if (!data || !data.username || !data.password) return socket.emit(UNAUTHORIZED);
-  logger.info(`We got authToken event for username: ${data.username}`);
-  let user;
-  try {
-    user = await validatePassword(
-      await populateUser({ username: data.username.toString() }, db),
-      data.password.toString(),
-    );
-    const token = await JWT.signAsync(
-      {
-        username: user.username,
-        display: user.display,
-        roles: user.roles,
-      },
-      conf.tokenSecret,
-      { expiresIn: conf.tokenOptions.expiresIn });
-    socket.emit(TOKEN, { token });
-  } catch (e) {
-    logger.error(authenticationError(e.message).message);
-    socket.emit(UNAUTHORIZED);
+const isUsernamePresent = (data, socket) => {
+  if (!data || !data.username || !data.password) {
+    socket.emit(eventConstants.UNAUTHORIZED);
+    return false;
+  }
+  return true;
+};
+
+const authenticate = async(data, socket) => {
+  if (isUsernamePresent(data, socket)) {
+    logger.info(`We got authToken event for username: ${data.username}`);
+    let user;
+    try {
+      user = await User.validatePassword(
+        await User.populateUser({ username: data.username.toString() }, db),
+        data.password.toString());
+      const token = await JWT.signAsync(
+        {
+          username: user.username,
+          display: user.display,
+          roles: user.roles,
+        },
+        conf.tokenSecret,
+        { expiresIn: conf.tokenOptions.expiresIn });
+      socket.emit(eventConstants.TOKEN, { token });
+    } catch (e) {
+      logger.error(errors.authenticationError(e.message).message);
+      socket.emit(eventConstants.UNAUTHORIZED);
+    }
   }
 };
 
-export const attachAuthEvents = (socket) => {
-  socket.on(AUTHENTICATE, data => authenticate(data, socket));
+const attachAuthEvents = (socket) => {
+  socket.on(eventConstants.AUTHENTICATE, data => authenticate(data, socket));
   socket.on('disconnect', () => {
     logger.info(`We got a disconnection: ${socket.id}`);
   });
 };
 
+module.exports = {
+  checkToken,
+  attachAuthEvents,
+};
