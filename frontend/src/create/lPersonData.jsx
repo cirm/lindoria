@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import TextField from 'material-ui/TextField';
+import TextField from 'redux-form-material-ui/lib/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
@@ -8,15 +8,6 @@ import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
 import { createPerson, editPerson, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
-
-const renderTextField = field => (
-  <TextField
-    hintText={field.label}
-    disabled={field.disabled}
-    errorText={field.touched && field.error}
-    {...field.input}
-  />
-);
 
 class CreatePerson extends PureComponent {
   constructor(props) {
@@ -57,12 +48,12 @@ class CreatePerson extends PureComponent {
         <form className="personForm" onSubmit={handleSubmit(this.savePerson)} >
           <div>
             <Field
-              name="pname" component={renderTextField} label="Unique name" disabled={this.isEdit()}
+              name="pname" component={TextField} floatingLabelText="Unique name" disabled={this.isEdit()}
             />
           </div>
           <div>
             <Field
-              name="display" component={renderTextField} label="Display name"
+              name="display" component={TextField} floatingLabelText="Display name"
             />
           </div>
           <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />

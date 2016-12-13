@@ -10,6 +10,7 @@ const getContent = async(socket) => {
     persons: data.persons || [],
     provinces: data.provinces || [],
     organizations: data.organizations || [],
+    holdings: data.holdings || [],
   });
   const finish = new Date();
   logger.info(`dataQuery took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
@@ -30,6 +31,15 @@ const createOrg = async(socket, data) => {
   logger.info(`saveOrg took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
   await getContent(socket);
 };
+
+const createHolding = async(socket, data) => {
+  const start = new Date();
+  console.log(data);
+  await db.queryFunction('empires.create_holding', [data.level, data.owner, data.province, data.type]);
+  const finish = new Date();
+  logger.info(`saveHolding took: ${(finish.getUTCMilliseconds() - start.getUTCMilliseconds())} ms`);
+  await getContent(socket);
+}
 
 const createProvince = async(socket, data) => {
   data.visible = !data.visible ? true : data.visible;
@@ -72,4 +82,5 @@ module.exports = {
   createDomain,
   editPerson,
   editProvince,
+  createHolding
 };

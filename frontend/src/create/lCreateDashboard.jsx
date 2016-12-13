@@ -8,10 +8,12 @@ import PersonForm from './lPersonData';
 import CreateOrganizationForm from './lCreateOrganization';
 import CreateDomainForm from './lCreateDomain';
 import ProvinceForm from './lProvinceData';
+import HoldingForm from './lHoldingData';
 
 class CreateDashboard extends PureComponent {
   getColumnHeaders() {
     if (!this.props.createType) return [];
+    if (!this.props[this.props.createType]) return [];
     if (this.props[this.props.createType].size < 1) return [];
     return this.props[this.props.createType].first().keySeq().toArray();
   }
@@ -46,6 +48,14 @@ class CreateDashboard extends PureComponent {
             persons={this.props.persons}
             domains={this.props.domains}
           />);
+      case 'holdings':
+        return (
+          <HoldingForm
+            editFocus={this.props.editFocus}
+            dispatch={this.props.dispatch}
+            organizations={this.props.organizations}
+            provinces={this.props.provinces}
+          />);
       default:
         return null;
     }
@@ -74,6 +84,7 @@ function mapStateToProps(state) {
     tableData: state.getIn(['data', 'table']),
     organizations: state.getIn(['data', 'organizations']),
     domains: state.getIn(['data', 'domains']),
+    holdings: state.getIn(['data', 'holdings']),
     provinces: state.getIn(['data', 'provinces']),
     editFocus: state.getIn(['landing', 'editFocus']),
   };
@@ -85,6 +96,7 @@ CreateDashboard.propTypes = {
   dispatch: PropTypes.func,
   persons: ImmutablePropTypes.list,
   domains: ImmutablePropTypes.list,
+  provinces: ImmutablePropTypes.list,
   editFocus: PropTypes.string,
 };
 

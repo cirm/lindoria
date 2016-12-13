@@ -66,3 +66,19 @@ export function editProvince(payload) {
     data: payload.delete('type'),
   };
 }
+
+export function createHolding(values) {
+  return {
+    type: 'CREATE_HOLDING',
+    meta: { lindoria: true },
+    data: values,
+  };
+}
+
+export function editHolding(payload) {
+  return {
+    type: 'EDIT_HOLDING',
+    meta: { lindoria: true },
+    data: payload.delete('type'),
+  };
+}

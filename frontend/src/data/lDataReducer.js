@@ -5,6 +5,7 @@ const dataUpdate = (state, data) => state
   .set('domains', fromJS(data.domains))
   .set('provinces', fromJS(data.provinces))
   .set('organizations', fromJS(data.organizations))
+  .set('holdings', fromJS(data.holdings))
   .set('persons', fromJS(data.persons));
 
 const applyFilter = (state, filter, field, type) => state.set('table', state

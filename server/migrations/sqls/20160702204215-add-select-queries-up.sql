@@ -29,6 +29,21 @@ FROM
 $BODY$
 LANGUAGE SQL;
 
+CREATE OR REPLACE FUNCTION empires.get_holdings() RETURNS JSON AS
+$BODY$
+SELECT
+    array_to_json(array_agg(row_to_json(p)))
+FROM
+    (SELECT
+        eh.holding_id,
+        eh.level,
+        eh.owner,
+        eh.province,
+        eh.type
+    FROM empires.holdings eh) p;
+$BODY$
+LANGUAGE SQL;
+
 CREATE OR REPLACE FUNCTION empires.get_organizations() RETURNS JSON AS
 $BODY$
 SELECT
@@ -66,7 +81,8 @@ RETURNS
         (provinces json,
          organizations json,
          persons json,
-         domains json
+         domains json,
+         holdings json
     ) AS
 $BODY$
 SELECT
@@ -89,6 +105,11 @@ SELECT
         *
     FROM
         empires.get_domains())
-        AS domains;
+        AS domains,
+    (SELECT
+        *
+    FROM
+        empires.get_holdings())
+        AS holdings;
 $BODY$
 LANGUAGE SQL;

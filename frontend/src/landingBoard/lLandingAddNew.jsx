@@ -46,7 +46,7 @@ class AddNewItem extends PureComponent {
           <Menu>
             <MenuItem primaryText="Domain" key="domain" onClick={() => this.handleCreate('domains')} />
             <MenuItem primaryText="Province" key="province" onClick={() => this.handleCreate('provinces')} />
-            <MenuItem primaryText="Holding" />
+            <MenuItem primaryText="Holding" key="holding" onClick={() => this.handleCreate('holdings')} />
           </Menu>
         </Popover>
       </div>

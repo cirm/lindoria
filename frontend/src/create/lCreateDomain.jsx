@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
+import SelectField from 'redux-form-material-ui/lib/SelectField';
+import TextField from 'redux-form-material-ui/lib/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
@@ -10,25 +10,6 @@ import PureComponent from '../lib/PureComponent';
 import { createDomain } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
-const renderTextField = field => (
-  <TextField
-    floatingLabelText={field.label}
-    hintText={field.label}
-    errorText={field.touched && field.error}
-    {...field.input}
-  />
-);
-
-const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
-  <SelectField
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(value)}
-    children={children}
-    {...custom}
-  />
-);
 
 class CreateDomain extends PureComponent {
   constructor(props) {
@@ -61,22 +42,22 @@ class CreateDomain extends PureComponent {
         </Toolbar>
         <form className={formClass} onSubmit={handleSubmit(this.saveDomain)} >
           <div>
-            <Field name="dname" component={renderTextField} label="Unique key" />
+            <Field name="dname" component={TextField} floatingLabelText="Unique key" />
           </div>
           <div>
-            <Field name="display" component={renderTextField} label="Organization name" />
+            <Field name="display" component={TextField} floatingLabelText="Organization name" />
           </div>
           <div>
-            <Field name="regent" component={renderSelectField} label="The master Guy" >
+            <Field name="regent" component={SelectField} floatingLabelText="The master Guy" >
               {this.getPersons().map(person =>
                 <MenuItem value={person.get('pname')} primaryText={person.get('display')} />)}
             </Field>
           </div>
           <div>
-            <Field name="abbr" component={renderTextField} label="Shortened form" />
+            <Field name="abbr" component={TextField} floatingLabelText="Shortened form" />
           </div>
           <div>
-            <Field name="treasury" component={renderTextField} label="Big dollaz" type="number" />
+            <Field name="treasury" component={TextField} floatingLabelText="Big dollaz" type="number" />
           </div>
           <RaisedButton label="Save" type="submit" primary style={{ margin: 12 }} />
         </form>

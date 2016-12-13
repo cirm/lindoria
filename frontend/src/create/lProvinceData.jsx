@@ -1,37 +1,18 @@
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import TextField from 'material-ui/TextField';
+import TextField from 'redux-form-material-ui/lib/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
+import SelectField from 'redux-form-material-ui/lib/SelectField';
 import map from 'lodash/fp/map';
 import { Field, reduxForm } from 'redux-form/immutable';
 import PureComponent from '../lib/PureComponent';
 import { createProvince, editProvince, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
-
-const renderTextField = field => (
-  <TextField
-    floatingLabelText={field.label}
-    disabled={field.disabled}
-    errorText={field.touched && field.error}
-    {...field.input}
-  />
-);
-
-const renderSelectField = field => (
-  <SelectField
-    floatingLabelText={field.label}
-    errorText={field.meta.touched && field.meta.error}
-    onChange={(event, index, value) => field.input.onChange(value)}
-    {...field.input}
-    {...field.custom}
-  >{field.children}</SelectField>
-);
 
 /*
  const validate = (values) => {
@@ -101,13 +82,13 @@ class CreateProvince extends PureComponent {
         </Toolbar>
         <form className="provinceForm" onSubmit={handleSubmit(this.saveProvince)} >
           <div>
-            <Field name="pname" component={renderTextField} disabled={this.isEdit()} label="Unique key" />
+            <Field name="pname" component={TextField} disabled={this.isEdit()} floatingLabelText="Unique key" />
           </div>
           <div>
-            <Field name="display" component={renderTextField} label="Province name" />
+            <Field name="display" component={TextField} floatingLabelText="Province name" />
           </div>
           <div>
-            <Field name="level" component={renderSelectField} label="Province level" >
+            <Field name="level" component={SelectField} floatingLabelText="Province level" >
               {map(level => <MenuItem
                 value={level}
                 primaryText={level}
@@ -115,24 +96,24 @@ class CreateProvince extends PureComponent {
             </Field>
           </div>
           <div>
-            <Field name="loyalty" component={renderSelectField} label="Are we Happy?" >
+            <Field name="loyalty" component={SelectField} floatingLabelText="Are we Happy?" >
               {map(key => <MenuItem value={key} primaryText={loyaltyMap[key]} />)(loyalty)}
             </Field>
           </div>
           <div>
-            <Field name="regent" component={renderSelectField} label="The master Guy" >
+            <Field name="regent" component={SelectField} floatingLabelText="The master Guy" >
               {this.getFromProps('persons').map(person =>
                 <MenuItem value={person.get('pname')} key={person.get('pname')} primaryText={person.get('display')} />)}
             </Field>
           </div>
           <div>
-            <Field name="domain" component={renderSelectField} label="Where it belongs" >
+            <Field name="domain" component={SelectField} floatingLabelText="Where it belongs" >
               {this.getFromProps('domains').map(domain =>
                 <MenuItem value={domain.get('dname')} key={domain.get('dname')} primaryText={domain.get('display')} />)}
             </Field>
           </div>
           <div>
-            <Field name="abbr" component={renderTextField} label="Shortened form" />
+            <Field name="abbr" component={TextField} floatingLabelText="Shortened form" />
           </div>
           <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
           {this.isEdit() ?

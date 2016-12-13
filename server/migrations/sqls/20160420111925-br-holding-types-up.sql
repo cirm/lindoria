@@ -13,7 +13,7 @@ CREATE TABLE empires.holdings (
 );
 
 CREATE OR REPLACE FUNCTION empires.create_holding(
-    IN  i_level     SMALLINT,
+    IN  i_level     INTEGER,
     IN  i_owner     VARCHAR(10),
     IN  i_province  VARCHAR(10),
     IN  i_type      empires.holding_types
@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION empires.create_holding(
 
 CREATE OR REPLACE FUNCTION empires.update_holding(
     IN  i_holding_id    INTEGER,
-    IN  i_level     SMALLINT,
+    IN  i_level     INTEGER,
     IN  i_owner     VARCHAR(10),
     IN  i_province  VARCHAR(10),
     IN  i_type      empires.holding_types

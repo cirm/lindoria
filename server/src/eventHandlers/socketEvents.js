@@ -13,6 +13,7 @@ const protectedRoutes = {
   CREATE_ORGANIZATION: lindoriaEvents.createOrg,
   CREATE_DOMAIN: lindoriaEvents.createDomain,
   CREATE_PROVINCE: lindoriaEvents.createProvince,
+  CREATE_HOLDING: lindoriaEvents.createHolding,
   EDIT_PERSON: lindoriaEvents.editPerson,
   EDIT_PROVINCE: lindoriaEvents.editProvince,
 };
