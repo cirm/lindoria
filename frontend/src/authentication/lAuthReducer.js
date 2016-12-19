@@ -1,14 +1,16 @@
 import { Map } from 'immutable';
 import browserHistory from 'react-router/lib/browserHistory';
 import { AUTHENTICATE, LOGIN, LOGOUT } from './lAuthConstants';
+import { QUERY_DATA } from '../data/lDataActionConstants';
 import decodeProfile from './lAuthToken';
 
 const tokenKey = 'lindoriaToken';
 
-const login1 = state => {
+const login1 = (state) => {
   console.log('wheee');
   return state;
 };
+
 const login = (state, data) => {
   const token = data.token;
   const profile = decodeProfile(token);
@@ -41,7 +43,7 @@ function authReducer(state = getInitialState(), action) {
       return login(state, action.data);
     case LOGOUT:
       return logout(state);
-    case 'QUERY_DATA':
+    case QUERY_DATA:
       return state.delete('updates');
     default:
       return state;

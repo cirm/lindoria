@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import Paper from 'material-ui/Paper';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'redux-form-material-ui/lib/SelectField';
@@ -17,17 +18,17 @@ class CreateOrganization extends PureComponent {
     this.chainBind(['saveOrganization']);
   }
 
+  getPersons() {
+    return this.props.persons || [];
+  }
+
   saveOrganization(values) {
     console.log(values);
     this.props.dispatch(createOrganization(values));
   }
 
-  getPersons() {
-    return this.props.persons || [];
-  }
-
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <Paper className={styles.root} zdepth={1} >
         <Toolbar className="toolBar" >
@@ -37,7 +38,7 @@ class CreateOrganization extends PureComponent {
         </Toolbar>
         <form className="organizationForm" onSubmit={handleSubmit(this.saveOrganization)} >
           <div>
-            <Field name="oname" component={TextField} floatingLabelText="Unique key"/>
+            <Field name="oname" component={TextField} floatingLabelText="Unique key" />
           </div>
           <div>
             <Field name="display" component={TextField} floatingLabelText="Organization name" />
@@ -54,12 +55,18 @@ class CreateOrganization extends PureComponent {
           <div>
             <Field name="treasury" component={TextField} floatingLabelText="Big dollaz" type="number" />
           </div>
-          <RaisedButton label="Save" type="submit" primary style={{ margin: 12 }} />
+          <RaisedButton label="Save" type="submit" primary className={styles.buttonMargin} />
         </form>
       </Paper>
     );
   }
 }
+
+CreateOrganization.propTypes = {
+  dispatch: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  persons: ImmutablePropTypes.list,
+};
 
 const CreateOrganizationContainer = reduxForm({
   form: 'createOrganization',

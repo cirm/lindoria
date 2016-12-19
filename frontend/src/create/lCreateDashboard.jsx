@@ -96,6 +96,7 @@ CreateDashboard.propTypes = {
   dispatch: PropTypes.func,
   persons: ImmutablePropTypes.list,
   domains: ImmutablePropTypes.list,
+  organizations: ImmutablePropTypes.list,
   provinces: ImmutablePropTypes.list,
   editFocus: PropTypes.string,
 };

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import TextField from 'redux-form-material-ui/lib/TextField';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
@@ -56,13 +57,13 @@ class CreatePerson extends PureComponent {
               name="display" component={TextField} floatingLabelText="Display name"
             />
           </div>
-          <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
+          <RaisedButton label={this.getLabel()} type="submit" primary className={styles.buttonMargin} />
           {this.isEdit() ?
             <RaisedButton
               label="Reset"
               type="button"
               onTouchTap={() => this.stopEdit(change)}
-              style={{ margin: 12 }}
+              className={styles.buttonMargin}
             /> :
             null}
         </form>
@@ -70,6 +71,13 @@ class CreatePerson extends PureComponent {
     );
   }
 }
+
+CreatePerson.propTypes = {
+  dispatch: PropTypes.func,
+  change: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  editFocus: ImmutablePropTypes.Map,
+};
 
 const CreatePersonForm = reduxForm({
   form: 'createPerson',

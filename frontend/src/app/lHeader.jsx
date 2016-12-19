@@ -10,6 +10,7 @@ import AccountBalance from 'material-ui/svg-icons/action/account-balance';
 import Link from 'react-router/lib/Link';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import browserHistory from 'react-router/lib/browserHistory';
+import styles from './lHeader.styl';
 import PureComponent from '../lib/PureComponent';
 import { getContent } from '../landingBoard/lLandingActionCreators';
 import { logoutUser, queriedUpdates } from '../authentication/lAuthActionCreators';
@@ -46,7 +47,7 @@ export class Header extends PureComponent {
     return (
       <div>
         <AppBar
-          style={{ margin: 5 }}
+          className={styles.root}
           title="Lindoria Brithright Handler"
           iconElementLeft={
             <IconButton containerElement={home} >
@@ -57,7 +58,7 @@ export class Header extends PureComponent {
               <div>
                 <IconMenu
                   iconButtonElement={
-                    <FlatButton label={this.props.profile.get('display')} style={{ margin: 5 }} />}
+                    <FlatButton label={this.props.profile.get('display')} className={styles.root} />}
                   targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                   anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                 >

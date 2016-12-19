@@ -1,22 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
-import TextField from 'material-ui/TextField';
+import TextField from 'redux-form-material-ui/lib/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import { authenticateUser } from './lAuthActionCreators';
 import styles from './lAuthLoginForm.styl';
 
-
-const renderTextField = field => (
-  <TextField
-    className={styles.textField}
-    hintText={field.label}
-    type={field.type}
-    errorText={field.touched && field.error}
-    {...field.input}
-  />
-);
 
 let dispatch;
 const triggerLogin = values => dispatch(authenticateUser(values));
@@ -33,10 +23,10 @@ const loginForm = (props) => {
       </Toolbar>
       <form onSubmit={handleSubmit(triggerLogin)} >
         <div>
-          <Field name="username" component={renderTextField} label="username" />
+          <Field name="username" component={TextField} floatingLabelText="username" />
         </div>
         <div>
-          <Field name="password" component={renderTextField} type="password" label="password" />
+          <Field name="password" component={TextField} type="password" floatingLabelText="password" />
         </div>
         <div>
           <RaisedButton

@@ -1,4 +1,5 @@
 import { toJS } from 'immutable';
+
 const tokenKey = 'lindoriaToken';
 
 export default socket => store => next => action => {

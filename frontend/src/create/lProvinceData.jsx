@@ -13,7 +13,6 @@ import PureComponent from '../lib/PureComponent';
 import { createProvince, editProvince, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
-
 /*
  const validate = (values) => {
  const errors = {};
@@ -115,13 +114,13 @@ class CreateProvince extends PureComponent {
           <div>
             <Field name="abbr" component={TextField} floatingLabelText="Shortened form" />
           </div>
-          <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
+          <RaisedButton label={this.getLabel()} type="submit" primary className={styles.buttonMargin} />
           {this.isEdit() ?
             <RaisedButton
               label="Reset"
               type="button"
               onTouchTap={() => this.stopEdit()}
-              style={{ margin: 12 }}
+              className={styles.buttonMargin}
             /> :
             null}
         </form>

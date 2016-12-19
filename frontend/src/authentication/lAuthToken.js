@@ -14,7 +14,7 @@ const urlBase64Becode = (str) => {
       throw new Error('Illegal base64url string!');
   }
 
-  let profile = JSON.parse(window.atob(output));
+  const profile = JSON.parse(window.atob(output));
   return profile; // polifyll https://github.com/davidchambers/Base64.js
 };
 

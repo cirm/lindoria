@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import SelectField from 'redux-form-material-ui/lib/SelectField';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import TextField from 'redux-form-material-ui/lib/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
-import { Field, reduxForm, reset } from 'redux-form/immutable';
+import { Field, reduxForm } from 'redux-form/immutable';
 import MenuItem from 'material-ui/MenuItem';
 import PureComponent from '../lib/PureComponent';
 import { createDomain } from './lCreateActionCreators';
@@ -27,20 +28,15 @@ class CreateDomain extends PureComponent {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
-    const formContainerClass = 'container login';
-    const formClass = `${formContainerClass} form`;
-    const toolbarClass = `${formContainerClass} toolbar`;
-
+    const { handleSubmit } = this.props;
     return (
-
       <Paper zdepth={1} className={styles.root} >
-        <Toolbar className={toolbarClass} >
+        <Toolbar>
           <ToolbarGroup >
             <ToolbarTitle text="Enter Domain details" />
           </ToolbarGroup>
         </Toolbar>
-        <form className={formClass} onSubmit={handleSubmit(this.saveDomain)} >
+        <form onSubmit={handleSubmit(this.saveDomain)} >
           <div>
             <Field name="dname" component={TextField} floatingLabelText="Unique key" />
           </div>
@@ -59,14 +55,18 @@ class CreateDomain extends PureComponent {
           <div>
             <Field name="treasury" component={TextField} floatingLabelText="Big dollaz" type="number" />
           </div>
-          <RaisedButton label="Save" type="submit" primary style={{ margin: 12 }} />
+          <RaisedButton label="Save" type="submit" primary className={styles.buttonMargin} />
         </form>
       </Paper>
-    )
-      ;
+    );
   }
-
 }
+
+CreateDomain.propTypes = {
+  dispatch: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  persons: ImmutablePropTypes.list,
+};
 
 const CreateDomainContainer = reduxForm({
   form: 'createDomain',

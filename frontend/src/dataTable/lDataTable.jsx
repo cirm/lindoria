@@ -24,6 +24,9 @@ const headerMap = {
   pname: 'Unique key',
   display: 'Display name',
   treasury: 'Treasury',
+  province: 'Located in',
+  type: 'Holding type',
+  holding_id: 'Holding id',
   abbr: 'Abbr',
   dname: 'Unique key',
   ruler: 'Ruler',
@@ -56,7 +59,7 @@ class DataTable extends PureComponent {
     return (
       <Paper className={styles.root} >
         {this.props.columnHeaders.length >= 1 ?
-          <Table height="30em" >
+          <Table className={styles.table} >
             <TableHeader
               displaySelectAll={false}
               adjustForCheckbox={false}
@@ -64,7 +67,8 @@ class DataTable extends PureComponent {
               <TableRow>{map(header => (
                 <TableHeaderColumn key={header} >
                   {<TextField
-                    style={filterStyle} className="filterField" key={header} floatingLabelText={headerMap[header]}
+                    style={filterStyle} className={styles.filterField} key={header}
+                    floatingLabelText={headerMap[header]}
                     onChange={e => this.setFilter(e, header)}
                   />}
                 </TableHeaderColumn>
@@ -73,7 +77,7 @@ class DataTable extends PureComponent {
             </TableHeader>
             <TableBody displayRowCheckbox={false} >
               {this.getData().map(item =>
-                <TableRow
+                <TableRow className={styles.tableRow}
                   onTouchTap={() => this.editRow(item)}
                   key={item.get(this.props.columnHeaders[0])}
                 >{map(header =>

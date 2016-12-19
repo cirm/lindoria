@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
@@ -91,13 +92,13 @@ class CreateHolding extends PureComponent {
               />)(holdingTypes)}
             </Field>
           </div>
-          <RaisedButton label={this.getLabel()} type="submit" primary style={{ margin: 12 }} />
+          <RaisedButton label={this.getLabel()} type="submit" primary className={styles.buttonMargin} />
           {this.isEdit() ?
             <RaisedButton
               label="Reset"
               type="button"
               onTouchTap={() => this.stopEdit(change)}
-              style={{ margin: 12 }}
+              className={styles.buttonMargin}
             /> :
             null}
         </form>
@@ -105,6 +106,13 @@ class CreateHolding extends PureComponent {
     );
   }
 }
+
+CreateHolding.propTypes = {
+  dispatch: PropTypes.func,
+  change: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  editFocus: ImmutablePropTypes.Map,
+};
 
 const CreateHoldingForm = reduxForm({
   form: 'createHolding',

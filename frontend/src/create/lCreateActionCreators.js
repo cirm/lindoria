@@ -4,6 +4,11 @@ import {
   CREATE_ORGANIZATION,
   CREATE_DOMAIN,
   CREATE_PROVINCE,
+  REMOVE_EDIT_FOCUS,
+  EDIT_PERSON,
+  EDIT_PROVINCE,
+  CREATE_HOLDING,
+  EDIT_HOLDING,
 } from './lCreateActionConstants';
 
 export function setCreateType(type) {
@@ -47,13 +52,13 @@ export function createProvince(values) {
 
 export function stopEdit() {
   return {
-    type: 'REMOVE_EDIT_FOCUS',
+    type: REMOVE_EDIT_FOCUS,
   };
 }
 
 export function editPerson(payload) {
   return {
-    type: 'EDIT_PERSON',
+    type: EDIT_PERSON,
     meta: { lindoria: true },
     data: payload.delete('type'),
   };
@@ -61,7 +66,7 @@ export function editPerson(payload) {
 
 export function editProvince(payload) {
   return {
-    type: 'EDIT_PROVINCE',
+    type: EDIT_PROVINCE,
     meta: { lindoria: true },
     data: payload.delete('type'),
   };
@@ -69,7 +74,7 @@ export function editProvince(payload) {
 
 export function createHolding(values) {
   return {
-    type: 'CREATE_HOLDING',
+    type: CREATE_HOLDING,
     meta: { lindoria: true },
     data: values,
   };
@@ -77,7 +82,7 @@ export function createHolding(values) {
 
 export function editHolding(payload) {
   return {
-    type: 'EDIT_HOLDING',
+    type: EDIT_HOLDING,
     meta: { lindoria: true },
     data: payload.delete('type'),
   };
