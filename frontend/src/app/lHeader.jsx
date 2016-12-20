@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import connect from 'react-redux/lib/components/connect';
+import connect from 'react-redux/lib/connect/connect';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';

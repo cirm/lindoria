@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import connect from 'react-redux/lib/components/connect';
+import connect from 'react-redux/lib/connect/connect';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import GetCreateType from './lGetCreateType';
 import DataList from '../dataTable/lDataTable';

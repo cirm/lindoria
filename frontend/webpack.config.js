@@ -44,7 +44,6 @@ const config = {
     new ExtractTextPlugin('style.css', { allChunks: true }),
   ],
   postcss: () => [
-    require('postcss-local-scope'),
     autoprefixer({ browsers: ['last 2 versions'] })],
 };
 

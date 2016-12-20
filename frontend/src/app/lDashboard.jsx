@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from 'react-redux/lib/components/connect';
+import connect from 'react-redux/lib/connect/connect';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureComponent from '../lib/PureComponent';
 import LandingDashboardContainer from '../landingBoard/lLandingDashBoard';

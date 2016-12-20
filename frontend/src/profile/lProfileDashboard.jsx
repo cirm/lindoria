@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from 'react-redux/lib/components/connect';
+import connect from 'react-redux/lib/connect/connect';
 import ProfileForm from './lProfileForm';
 import styles from './lProfileDashboard.styl';
 

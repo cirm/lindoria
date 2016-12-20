@@ -77,7 +77,8 @@ class DataTable extends PureComponent {
             </TableHeader>
             <TableBody displayRowCheckbox={false} >
               {this.getData().map(item =>
-                <TableRow className={styles.tableRow}
+                <TableRow
+                  className={styles.tableRow}
                   onTouchTap={() => this.editRow(item)}
                   key={item.get(this.props.columnHeaders[0])}
                 >{map(header =>
