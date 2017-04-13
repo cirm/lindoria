@@ -1,50 +1,63 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { resolve } = require('path');
 
-const config = {
-  devtool: 'eval-source-map',
+module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://0.0.0.0:8080',
     'webpack/hot/only-dev-server',
-    './src/index.jsx',
+    './index.jsx',
   ],
+  devtool: 'eval-source-map',
+  output: {
+    filename: 'index.js',
+    publicPath: '/',
+    path: resolve(__dirname, 'dist'),
+  },
+  
+  context: resolve(__dirname, 'src'),
+  
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel',
+      loader: 'babel-loader',
     }, {
-      test: /\.svg$/,
-      loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]',
+      test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+      loader: 'url-loader?limit=100000&name=[name].[ext]',
     }, {
       test: /\.styl$/,
-      /* eslint-disable max-len */
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!stylus-loader'),
-      /* eslint-enable max-len */
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]',
+          'postcss-loader',
+          'stylus-loader'],
+      }),
     }],
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.styl'],
-  },
-  output: {
-    path: `${__dirname}/dist`,
-    publicPath: '/',
-    filename: 'bundle.js',
-  },
   devServer: {
-    devtool: 'eval-source-map',
-    inline: true,
-    contentBase: './dist',
     hot: true,
+    publicPath: '/',
+    contentBase: resolve(__dirname, 'dist'),
     historyApiFallback: true,
   },
+  
+  resolve: {
+    extensions: ['.js', '.jsx', '.styl', 'woff', 'woff2'],
+  },
+  
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [
+          autoprefixer(),
+        ],
+      },
+    }),
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('style.css', { allChunks: true }),
+    new webpack.NamedModulesPlugin(),
+    new ExtractTextPlugin({ filename: 'style.css', allChunks: true }),
   ],
-  postcss: () => [
-    autoprefixer({ browsers: ['last 2 versions'] })],
 };
-
-module.exports = config;

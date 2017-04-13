@@ -3,9 +3,7 @@ import connect from 'react-redux/lib/connect/connect';
 import ProfileForm from './lProfileForm';
 import styles from './lProfileDashboard.styl';
 
-import PureComponent from '../lib/PureComponent';
-
-class ProfileDashboard extends PureComponent {
+class ProfileDashboard extends React.PureComponent {
   render() {
     return (
       <div className={styles.main} >

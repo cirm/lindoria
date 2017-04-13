@@ -34,4 +34,4 @@ const validatePassword = async (user, passwordToMatch) => {
 module.exports = {
   validatePassword,
   populateUser,
-}
+};

@@ -8,17 +8,16 @@ import SelectField from 'redux-form-material-ui/lib/SelectField';
 import { connect } from 'react-redux';
 import map from 'lodash/fp/map';
 import { Field, reduxForm } from 'redux-form/immutable';
-import PureComponent from '../lib/PureComponent';
 import { createHolding, editHolding, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
 const holdingLevels = ['0', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const holdingTypes = ['law', 'guild', 'temple', 'source'];
 
-class CreateHolding extends PureComponent {
+class CreateHolding extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.chainBind(['saveHolding']);
+    this.saveHolding = this.saveHolding.bind(this);
   }
 
   getFromProps(type) {

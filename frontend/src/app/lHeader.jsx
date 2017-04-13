@@ -11,7 +11,6 @@ import Link from 'react-router/lib/Link';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import browserHistory from 'react-router/lib/browserHistory';
 import styles from './lHeader.styl';
-import PureComponent from '../lib/PureComponent';
 import { getContent } from '../landingBoard/lLandingActionCreators';
 import { logoutUser, queriedUpdates } from '../authentication/lAuthActionCreators';
 import { setCreateType } from '../create/lCreateActionCreators';
@@ -20,7 +19,7 @@ import { setCreateType } from '../create/lCreateActionCreators';
 const profile = <Link to="/profile" />;
 const home = <Link to="/" />;
 
-export class Header extends PureComponent {
+export class Header extends React.PureComponent {
   componentWillMount() {
     if (this.props.profile) {
       if (this.props.profile.get('updates')) {

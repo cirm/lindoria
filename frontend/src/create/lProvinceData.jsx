@@ -9,7 +9,6 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'redux-form-material-ui/lib/SelectField';
 import map from 'lodash/fp/map';
 import { Field, reduxForm } from 'redux-form/immutable';
-import PureComponent from '../lib/PureComponent';
 import { createProvince, editProvince, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
@@ -38,10 +37,10 @@ const loyaltyMap = {
 
 const provinceLevels = ['0', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-class CreateProvince extends PureComponent {
+class CreateProvince extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.chainBind(['saveProvince']);
+    this.saveProvince = this.saveProvince.bind(this);
   }
 
   getFromProps(type) {

@@ -5,14 +5,13 @@ import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import { reduxForm } from 'redux-form';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Paper from 'material-ui/Paper';
-import PureComponent from '../lib/PureComponent';
 import styles from './lProfileDashboard.styl';
 
 
-class ProfileForm extends PureComponent {
+class ProfileForm extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.chainBind(['triggerUpdate']);
+    this.triggerUpdate = this.triggerUpdate.bind(this);
   }
 
   getUsername() {

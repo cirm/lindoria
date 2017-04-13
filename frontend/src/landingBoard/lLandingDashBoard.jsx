@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react';
 import connect from 'react-redux/lib/connect/connect';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import PureComponent from '../lib/PureComponent';
 import LindoriaList from './lLandingList';
 import LindoriaFocus from './lLandingFocus';
 import { getContent } from './lLandingActionCreators';
 import LindoriaDomainFocus from './lLandingDomain';
 import styles from './lLandingDashBoard.styl';
 
-class LandingDashboard extends PureComponent {
+class LandingDashboard extends React.PureComponent {
   componentWillMount() {
     return this.props.dispatch(getContent());
   }

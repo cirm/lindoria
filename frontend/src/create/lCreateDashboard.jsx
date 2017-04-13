@@ -3,14 +3,13 @@ import connect from 'react-redux/lib/connect/connect';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import GetCreateType from './lGetCreateType';
 import DataList from '../dataTable/lDataTable';
-import PureComponent from '../lib/PureComponent';
 import PersonForm from './lPersonData';
 import CreateOrganizationForm from './lCreateOrganization';
 import CreateDomainForm from './lCreateDomain';
 import ProvinceForm from './lProvinceData';
 import HoldingForm from './lHoldingData';
 
-class CreateDashboard extends PureComponent {
+class CreateDashboard extends React.PureComponent {
   getColumnHeaders() {
     if (!this.props.createType) return [];
     if (!this.props[this.props.createType]) return [];

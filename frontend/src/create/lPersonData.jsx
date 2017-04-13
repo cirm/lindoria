@@ -6,14 +6,13 @@ import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form/immutable';
-import PureComponent from '../lib/PureComponent';
 import { createPerson, editPerson, stopEdit } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
-class CreatePerson extends PureComponent {
+class CreatePerson extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.chainBind(['savePerson']);
+    this.savePerson = this.savePerson.bind(this);
   }
 
   getLabel() {

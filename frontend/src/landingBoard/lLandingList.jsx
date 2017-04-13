@@ -2,11 +2,10 @@ import React, { PropTypes } from 'react';
 import Paper from 'material-ui/Paper';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List, ListItem } from 'material-ui/List';
-import PureComponent from '../lib/PureComponent';
 import { setFocus } from './lLandingActionCreators';
 import AddNewItem from './lLandingAddNew';
 
-class LindoriaList extends PureComponent {
+class LindoriaList extends React.PureComponent {
   getFocusProvinceName() {
     return this.props.focus ? this.props.focus.getIn(['province', 'pname']) : false;
   }

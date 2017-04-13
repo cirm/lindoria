@@ -6,12 +6,11 @@ import MenuItem from 'material-ui/MenuItem';
 import browserHistory from 'react-router/lib/browserHistory';
 import { toggleCreateMenu } from './lLandingActionCreators';
 import { setCreateType } from '../create/lCreateActionCreators';
-import PureComponent from '../lib/PureComponent';
 
-class AddNewItem extends PureComponent {
+class AddNewItem extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.chainBind(['handleTouchTap']);
+    this.handleTouchTap = this.handleTouchTap.bind(this);
   }
 
   handleCreate(type) {

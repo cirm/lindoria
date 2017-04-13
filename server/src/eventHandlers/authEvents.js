@@ -16,7 +16,7 @@ function extractToken(bearerToken) {
   return parts[1];
 }
 
-const checkToken = async(bearer) => {
+const checkToken = async (bearer) => {
   if (!bearer) return false;
   let isAllowed;
   try {
@@ -35,7 +35,7 @@ const isUsernamePresent = (data, socket) => {
   return true;
 };
 
-const authenticate = async(data, socket) => {
+const authenticate = async (data, socket) => {
   if (isUsernamePresent(data, socket)) {
     logger.info(`We got authToken event for username: ${data.username}`);
     let user;

@@ -7,15 +7,14 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'redux-form-material-ui/lib/SelectField';
 import TextField from 'redux-form-material-ui/lib/TextField';
 import { Field, reduxForm } from 'redux-form/immutable';
-import PureComponent from '../lib/PureComponent';
 import { createOrganization } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
 
-class CreateOrganization extends PureComponent {
+class CreateOrganization extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.chainBind(['saveOrganization']);
+    this.saveOrganization = this.saveOrganization.bind(this);
   }
 
   getPersons() {

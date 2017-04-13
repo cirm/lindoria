@@ -12,7 +12,6 @@ import {
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import { startEdit, applyFilter } from './lDataTableActionCreators';
-import PureComponent from '../lib/PureComponent';
 import styles from './lListContainer.styl';
 
 const filterStyle = {
@@ -38,7 +37,7 @@ const headerMap = {
   owner: 'Responsible person',
 };
 
-class DataTable extends PureComponent {
+class DataTable extends React.PureComponent {
   getData() {
     if (!this.props.tableData) return this.props.fields;
     if (this.props.tableData.first().keySeq().equals(this.props.fields.first().keySeq())) {

@@ -7,15 +7,14 @@ import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import { Field, reduxForm } from 'redux-form/immutable';
 import MenuItem from 'material-ui/MenuItem';
-import PureComponent from '../lib/PureComponent';
 import { createDomain } from './lCreateActionCreators';
 import styles from './lActionContainer.styl';
 
 
-class CreateDomain extends PureComponent {
+class CreateDomain extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.chainBind(['saveDomain']);
+    this.saveDomain = this.saveDomain.bind(this);
   }
 
   getPersons() {

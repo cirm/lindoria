@@ -2,7 +2,7 @@ import { toJS } from 'immutable';
 
 const tokenKey = 'lindoriaToken';
 
-export default socket => store => next => action => {
+export default socket => store => next => (action) => {
   if (action.meta && action.meta.auth) {
     socket.emit(action.type, action.data);
   }
